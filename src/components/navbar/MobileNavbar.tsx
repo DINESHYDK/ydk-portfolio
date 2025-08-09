@@ -25,7 +25,7 @@ export function MobileNavbar({ activeId, onParty }: { activeId: string; onParty:
 
   return (
     <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%]">
-      <div className="glass rounded-full px-3 py-2 border shadow-lg">
+      <div className="glass-dark rounded-full px-3 py-2 border shadow-lg">
         <ul className="flex items-center justify-between">
           <li>
             <button

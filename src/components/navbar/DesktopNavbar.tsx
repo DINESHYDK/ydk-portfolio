@@ -25,7 +25,7 @@ export function DesktopNavbar({ activeId, onParty }: { activeId: string; onParty
 
   return (
     <nav className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40">
-      <div className="glass rounded-full px-4 py-2 shadow-lg border animate-fade-in">
+      <div className="glass-dark rounded-full px-4 py-2 shadow-lg border animate-fade-in">
         <ul className="flex items-center gap-1">
           <li>
             <button
