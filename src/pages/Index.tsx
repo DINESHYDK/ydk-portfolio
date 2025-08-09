@@ -1,12 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import AuroraBackground from "@/components/AuroraBackground";
+import { DesktopNavbar } from "@/components/navbar/DesktopNavbar";
+import { MobileNavbar } from "@/components/navbar/MobileNavbar";
+import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
+import { Skills } from "@/components/sections/Skills";
+import { CodingStats } from "@/components/sections/CodingStats";
+import { ContactChatbot } from "@/components/sections/ContactChatbot";
+import { useActiveSection } from "@/hooks/useActiveSection";
+import { useState } from "react";
 
 const Index = () => {
+  const [party, setParty] = useState(false);
+  const active = useActiveSection(["home", "projects", "skills", "stats", "contact"]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="relative min-h-screen">
+      <header>
+        <DesktopNavbar activeId={active} onParty={() => setParty((p) => !p)} />
+        <MobileNavbar activeId={active} onParty={() => setParty((p) => !p)} />
+      </header>
+
+      <main>
+        <div className="absolute inset-0 -z-10">
+          <AuroraBackground party={party} />
+        </div>
+
+        <Hero />
+        <Projects />
+        <Skills />
+        <CodingStats />
+        <ContactChatbot />
+      </main>
+
+      <footer className="py-10 text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} Your Name. All rights reserved.
+      </footer>
     </div>
   );
 };
