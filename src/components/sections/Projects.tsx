@@ -35,6 +35,8 @@ export const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
+              whileHover={{ y: -6, scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               className="hover-scale"
             >
               <Card className="glass h-full">

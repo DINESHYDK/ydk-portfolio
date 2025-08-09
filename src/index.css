@@ -56,7 +56,7 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222.2 84% 3.5%;
     --foreground: 210 40% 98%;
 
     --card: 222.2 84% 4.9%;
@@ -126,6 +126,19 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+
+  .gradient-text-animated {
+    background-image: linear-gradient(120deg,
+      hsl(var(--primary)),
+      hsl(var(--accent)),
+      hsl(var(--primary))
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: aurora 10s ease-in-out infinite;
   }
 
   .aurora {
