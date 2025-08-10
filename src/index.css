@@ -8,89 +8,46 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Dark theme only - Purple & Emerald Green color scheme */
+    --background: 260 100% 13%; /* #180043 */
+    --foreground: 0 0% 100%; /* White text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 260 100% 8%; /* Darker purple for cards */
+    --card-foreground: 0 0% 100%; /* White text */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 260 100% 8%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 160 84% 39%; /* Emerald green */
+    --primary-foreground: 0 0% 100%; /* White text on green */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 260 100% 18%; /* Lighter purple */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 260 50% 20%; /* Muted purple */
+    --muted-foreground: 0 0% 70%; /* Light grey for muted text */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 160 84% 45%; /* Brighter emerald for accents */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%; /* Red for errors */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 25%; /* Light grey borders */
+    --input: 260 100% 15%; /* Slightly lighter purple for inputs */
+    --ring: 160 84% 39%; /* Green focus ring */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 3.5%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Sidebar colors */
+    --sidebar-background: 260 100% 10%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 160 84% 39%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 260 100% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 20%; /* Silver borders */
+    --sidebar-ring: 160 84% 39%;
   }
 }
 
@@ -101,7 +58,9 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+      Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans",
+      sans-serif;
   }
 }
 
@@ -109,31 +68,33 @@ All colors MUST be HSL.
   .glass {
     background: linear-gradient(
       135deg,
-      hsl(var(--background) / 0.6),
-      hsl(var(--background) / 0.4)
+      hsl(var(--background) / 0.7),
+      hsl(var(--card) / 0.5)
     );
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border));
-    box-shadow: 0 10px 30px -10px hsl(var(--ring) / 0.25);
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.15);
   }
 
   .glass-dark {
     background: linear-gradient(
       135deg,
-      hsl(var(--background) / 0.6),
-      hsl(var(--foreground) / 0.10)
+      hsl(var(--card) / 0.8),
+      hsl(var(--background) / 0.6)
     );
     backdrop-filter: blur(14px) saturate(120%);
     -webkit-backdrop-filter: blur(14px) saturate(120%);
-    border: 1px solid hsl(var(--foreground) / 0.12);
-    box-shadow: 0 12px 34px -12px hsl(var(--ring) / 0.35);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 12px 34px -12px hsl(var(--primary) / 0.25);
   }
 
   .gradient-text {
-    background-image: linear-gradient(120deg,
+    background-image: linear-gradient(
+      120deg,
       hsl(var(--primary)),
-      hsl(var(--accent))
+      hsl(var(--accent)),
+      hsl(160 100% 50%)
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -141,12 +102,14 @@ All colors MUST be HSL.
   }
 
   .gradient-text-animated {
-    background-image: linear-gradient(120deg,
+    background-image: linear-gradient(
+      120deg,
       hsl(var(--primary)),
       hsl(var(--accent)),
+      hsl(160 100% 50%),
       hsl(var(--primary))
     );
-    background-size: 200% 200%;
+    background-size: 300% 300%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -157,9 +120,26 @@ All colors MUST be HSL.
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(40% 50% at 20% 10%, hsl(var(--primary) / 0.35), transparent 60%),
-                radial-gradient(40% 50% at 80% 20%, hsl(var(--accent) / 0.3), transparent 60%),
-                radial-gradient(50% 60% at 50% 80%, hsl(var(--secondary) / 0.25), transparent 60%);
+    background: radial-gradient(
+        40% 50% at 20% 10%,
+        hsl(var(--primary) / 0.4),
+        transparent 60%
+      ),
+      radial-gradient(
+        40% 50% at 80% 20%,
+        hsl(var(--accent) / 0.35),
+        transparent 60%
+      ),
+      radial-gradient(
+        50% 60% at 50% 80%,
+        hsl(260 100% 25% / 0.3),
+        transparent 60%
+      ),
+      radial-gradient(
+        30% 40% at 70% 60%,
+        hsl(160 100% 50% / 0.2),
+        transparent 50%
+      );
     filter: blur(40px);
     opacity: 0.9;
     animation: aurora 12s ease-in-out infinite;
@@ -175,8 +155,12 @@ All colors MUST be HSL.
     position: relative;
   }
   .story-link::after {
-    content: '';
-    position: absolute; left: 0; bottom: -2px; height: 2px; width: 100%;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
     background: hsl(var(--primary));
     transform: scaleX(0);
     transform-origin: bottom right;
@@ -187,8 +171,14 @@ All colors MUST be HSL.
     transform-origin: bottom left;
   }
 
-  .hover-scale { transition: transform 200ms ease; }
-  .hover-scale:hover { transform: scale(1.05); }
+  .hover-scale {
+    transition: transform 200ms ease;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
 
-  .pulse { animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+  .pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }
