@@ -1,4 +1,10 @@
-import { Home, FolderGit2, Wrench, BarChart3, MessageCircle } from "lucide-react";
+import {
+  Home,
+  FolderGit2,
+  Wrench,
+  BarChart3,
+  MessageCircle,
+} from "lucide-react";
 
 const LINKS = [
   { id: "home", label: "Home", icon: Home },
@@ -8,17 +14,24 @@ const LINKS = [
   { id: "contact", label: "Contact", icon: MessageCircle },
 ];
 
-export function MobileNavbar({ activeId }: { activeId: string; onParty: () => void }) {
+export function MobileNavbar({
+  activeId,
+}: {
+  activeId: string;
+  onParty: () => void;
+}) {
   return (
-    <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%]">
-      <div className="glass-dark rounded-full px-3 py-2 border shadow-lg">
+    <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[85%] max-w-sm">
+      <div className="glass-dark rounded-full px-2 py-2 border shadow-lg">
         <ul className="flex items-center justify-between">
           {LINKS.map(({ id, label, icon: Icon }) => (
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`flex items-center gap-1 px-3 py-2 rounded-full transition-colors hover:bg-muted/50 ${
-                  activeId === id ? "bg-muted text-primary font-medium" : ""
+                className={`flex items-center justify-center p-3 rounded-full transition-all duration-200 hover:bg-muted/50 hover:scale-110 ${
+                  activeId === id
+                    ? "bg-muted text-primary font-medium scale-105"
+                    : ""
                 }`}
                 aria-label={label}
               >

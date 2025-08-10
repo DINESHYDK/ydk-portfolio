@@ -5,11 +5,11 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+
 import ProfileCard from "@/components/ui/ProfileCard";
 import GradientText from "@/components/ui/GradientText";
 import TextTypeOptimized from "@/components/ui/TextTypeOptimized";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -132,27 +132,33 @@ export const Hero = () => {
 
         {/* Buttons row beneath both columns */}
         <motion.div
-          className="mt-8 flex items-center justify-center gap-3"
+          className="mt-8 flex items-center justify-center gap-4"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.15 }}
         >
-          <motion.div
-            whileHover={{ y: -2, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          <InteractiveHoverButton
+            className="w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg"
+            onClick={() => {
+              // Navigate to resume or open resume
+              window.open("/resume", "_blank");
+            }}
           >
-            <Button asChild>
-              <Link to="/resume">View Resume</Link>
-            </Button>
-          </motion.div>
-          <motion.div
-            whileHover={{ y: -2, scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            View Resume
+          </InteractiveHoverButton>
+
+          <InteractiveHoverButton
+            className="w-auto px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg"
+            onClick={() => {
+              // Scroll to contact section
+              const contactSection = document.getElementById("contact");
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
           >
-            <Button asChild variant="outline">
-              <Link to="/contact">Contact me</Link>
-            </Button>
-          </motion.div>
+            Contact Me
+          </InteractiveHoverButton>
         </motion.div>
       </div>
     </section>
