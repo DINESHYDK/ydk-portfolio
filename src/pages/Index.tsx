@@ -14,16 +14,17 @@ const Index = () => {
   const active = useActiveSection(["home", "projects", "skills", "stats", "contact"]);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen animate-enter">
       <header>
         <DesktopNavbar activeId={active} onParty={() => setParty((p) => !p)} />
         <MobileNavbar activeId={active} onParty={() => setParty((p) => !p)} />
       </header>
 
-      <main>
+      <main className="animate-fade-in">
         <div className="absolute inset-0 -z-10">
           <AuroraBackground party={party} />
         </div>
+        <div className="absolute inset-0 -z-10 bg-background/10" aria-hidden />
 
         <Hero />
         <Projects />
@@ -33,7 +34,7 @@ const Index = () => {
       </main>
 
       <footer className="py-10 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Your Name. All rights reserved.
+        © {new Date().getFullYear()} Dinesh Krishna. All rights reserved.
       </footer>
     </div>
   );
