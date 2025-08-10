@@ -548,84 +548,6 @@
 
 @media (max-width: 320px) {
   .pc-card {
-    height: 55svh;
-    max-height: 320px;
-  }
-
-  .pc-details h3 {
-    font-size: min(3svh, 1.5em);
-  }
-
-  .pc-details p {
-    font-size: 11px;
-  }
-
-  .pc-user-info {
-    padding: 6px 8px;
-    border-radius: 50px;
-  }
-
-  .pc-mini-avatar {
-    width: 20px;
-    height: 20px;
-  }
-
-  .pc-user-details {
-    gap: 6px;
-  }
-
-  .pc-handle {
-    font-size: 11px;
-  }
-
-  .pc-status {
-    font-size: 8px;
-  }
-
-  .pc-contact-btn {
-    padding: 4px 8px;
-    font-size: 9px;
-    border-radius: 50px;
-  }
-}
-
-/* Additional responsive optimizations for Hero section */
-@media (max-width: 1024px) {
-  .pc-card {
-    height: 75svh;
-    max-height: 480px;
-  }
-}
-
-/* Ensure proper sizing in grid layout */
-.pc-card-wrapper {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Better mobile landscape support */
-@media (max-width: 768px) and (orientation: landscape) {
-  .pc-card {
-    height: 85vh;
-    max-height: 400px;
-  }
-
-  .pc-details {
-    top: 1.8em;
-  }
-
-  .pc-details h3 {
-    font-size: min(4vh, 2em);
-  }
-}
-
-/* Ultra-small screens */
-@media (max-width: 320px) {
-  .pc-card {
     height: 50svh;
     max-height: 300px;
   }
@@ -666,13 +588,44 @@
     border-radius: 8px;
   }
 }
+
+/* Additional responsive optimizations for Hero section */
+@media (max-width: 1024px) {
+  .pc-card {
+    height: 75svh;
+    max-height: 480px;
+  }
+}
+
+/* Ensure proper sizing in grid layout */
+.pc-card-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Better mobile landscape support */
+@media (max-width: 768px) and (orientation: landscape) {
+  .pc-card {
+    height: 85vh;
+    max-height: 400px;
+  }
+
+  .pc-details {
+    top: 1.8em;
+  }
+
+  .pc-details h3 {
+    font-size: min(4vh, 2em);
+  }
+}
+
 /* Mobile centering improvements */
 @media (max-width: 768px) {
   .pc-card-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     max-width: 350px;
   }
 }

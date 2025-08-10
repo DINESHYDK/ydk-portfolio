@@ -67,10 +67,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   mobileTiltSensitivity = 5,
   miniAvatarUrl,
   name = "Y. Dinesh Krishna",
-  title = "AI Engineer & Full Stack Developer",
+  title = "AI & Software Development",
   handle = "ydk",
   status = "Available for work",
-  contactText = "Contact Me",
+  contactText = "Want to talk?",
   showUserInfo = true,
   onContactClick,
 }) => {

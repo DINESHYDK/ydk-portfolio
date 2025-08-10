@@ -47,10 +47,10 @@ export const Hero = () => {
             <ProfileCard
               avatarUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
               name="Y. Dinesh Krishna"
-              title="AI Engineer & Full Stack Developer"
+              title="AI & Software Development"
               handle="ydk"
               status="Available for work"
-              contactText="Contact Me"
+              contactText="Wanna Talk?"
               enableTilt={true}
               enableMobileTilt={true}
               showUserInfo={true}
@@ -76,7 +76,7 @@ export const Hero = () => {
               <GradientText
                 colors={["#64ffda", "#4079ff", "#64ffda", "#40a9ff", "#64ffda"]}
                 animationSpeed={4}
-                showBorder={false}
+                showBorder={true}
                 className="text-5xl md:text-7xl font-extrabold"
               >
                 Y. Dinesh Krishna
