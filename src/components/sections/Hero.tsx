@@ -45,7 +45,8 @@ export const Hero = () => {
           {/* Left: Tilt Card (approx 40%) */}
           <div className="md:col-span-5 flex justify-center items-center mb-8 md:mb-0">
             <ProfileCard
-              avatarUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+              avatarUrl="/DineshProfile.png"
+              miniAvatarUrl="/DineshProfile.png"
               name="Y. Dinesh Krishna"
               title="AI & Software Development"
               handle="ydk"
