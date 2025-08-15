@@ -2,6 +2,7 @@ import AuroraBackground from "@/components/AuroraBackground";
 import { DesktopNavbar } from "@/components/navbar/DesktopNavbar";
 import { MobileNavbar } from "@/components/navbar/MobileNavbar";
 import { Hero } from "@/components/sections/Hero";
+import { AboutMe } from "@/components/sections/AboutMe";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { CodingStats } from "@/components/sections/CodingStats";
@@ -11,7 +12,14 @@ import { useState } from "react";
 
 const Index = () => {
   const [party, setParty] = useState(false);
-  const active = useActiveSection(["home", "projects", "skills", "stats", "contact"]);
+  const active = useActiveSection([
+    "home",
+    "about",
+    "projects",
+    "skills",
+    "stats",
+    "contact",
+  ]);
 
   return (
     <div className="relative min-h-screen animate-enter">
@@ -27,6 +35,7 @@ const Index = () => {
         <div className="absolute inset-0 -z-10 bg-background/10" aria-hidden />
 
         <Hero />
+        <AboutMe />
         <Projects />
         <Skills />
         <CodingStats />

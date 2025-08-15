@@ -1,5 +1,6 @@
 import {
   Home,
+  User,
   FolderGit2,
   Wrench,
   BarChart3,
@@ -8,6 +9,7 @@ import {
 
 const LINKS = [
   { id: "home", label: "Home", icon: Home },
+  { id: "about", label: "About", icon: User },
   { id: "projects", label: "Projects", icon: FolderGit2 },
   { id: "skills", label: "Skills", icon: Wrench },
   { id: "stats", label: "Stats", icon: BarChart3 },
