@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/types/project-showcase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Play } from "lucide-react";
+import { ExternalLink, Github, Play, Star } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
@@ -12,6 +12,57 @@ interface ProjectCardProps {
   onDemoClick: (project: Project) => void;
   isMobile: boolean;
 }
+
+// Technology icon mapping
+const getTechnologyIcon = (techName: string) => {
+  const iconMap: Record<string, string> = {
+    // Exact matches from project data
+    React: "devicon-react-original",
+    TypeScript: "devicon-typescript-plain",
+    "Next.js": "devicon-nextjs-original",
+    "Tailwind CSS": "devicon-tailwindcss-plain",
+    "Node.js": "devicon-nodejs-plain",
+    Python: "devicon-python-plain",
+    "OpenAI API": "devicon-openai-original",
+    MongoDB: "devicon-mongodb-plain",
+    Firebase: "devicon-firebase-plain",
+    Vite: "devicon-vitejs-plain",
+    "Framer Motion": "devicon-framer-plain",
+    "shadcn/ui": "devicon-react-original",
+
+    // Additional common technologies
+    JavaScript: "devicon-javascript-plain",
+    HTML: "devicon-html5-plain",
+    CSS: "devicon-css3-plain",
+    "Vue.js": "devicon-vuejs-plain",
+    Angular: "devicon-angularjs-plain",
+    Java: "devicon-java-plain",
+    "C++": "devicon-cplusplus-plain",
+    "C#": "devicon-csharp-plain",
+    PHP: "devicon-php-plain",
+    Ruby: "devicon-ruby-plain",
+    Go: "devicon-go-plain",
+    PostgreSQL: "devicon-postgresql-plain",
+    MySQL: "devicon-mysql-plain",
+    Redis: "devicon-redis-plain",
+    SQLite: "devicon-sqlite-plain",
+    AWS: "devicon-amazonwebservices-original",
+    Azure: "devicon-azure-plain",
+    "Google Cloud": "devicon-googlecloud-plain",
+    Docker: "devicon-docker-plain",
+    Kubernetes: "devicon-kubernetes-plain",
+    Git: "devicon-git-plain",
+    GitHub: "devicon-github-original",
+    Figma: "devicon-figma-plain",
+    VSCode: "devicon-vscode-plain",
+    Vim: "devicon-vim-plain",
+    Linux: "devicon-linux-plain",
+    Windows: "devicon-windows8-original",
+    MacOS: "devicon-apple-original",
+  };
+
+  return iconMap[techName] || "devicon-javascript-plain"; // Default fallback
+};
 
 export const ProjectCard = ({
   project,
@@ -96,23 +147,34 @@ export const ProjectCard = ({
             {/* Featured Badge */}
             {project.featured && (
               <motion.div
-                className="absolute top-3 left-3 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium"
+                className="absolute top-3 left-3 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.3 }}
               >
+                <Star className="w-3 h-3" />
                 Featured
               </motion.div>
             )}
 
             {/* Category Badge */}
             <motion.div
-              className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm text-foreground px-2 py-1 rounded-full text-xs font-medium"
+              className="absolute top-3 right-3 bg-background/80 backdrop-blur-sm text-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.3 }}
             >
-              {project.category === "ai" ? "🤖 AI" : "🌐 Web"}
+              {project.category === "ai" ? (
+                <>
+                  <i className="devicon-tensorflow-original text-sm"></i>
+                  AI
+                </>
+              ) : (
+                <>
+                  <i className="devicon-html5-plain text-sm"></i>
+                  Web
+                </>
+              )}
             </motion.div>
 
             {/* Hover Overlay for Desktop */}
@@ -171,20 +233,24 @@ export const ProjectCard = ({
               {project.description}
             </p>
 
-            {/* Technologies - Show all */}
+            {/* Technologies - Show all with Devicon icons */}
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <motion.span
-                  key={tech.name}
-                  className="px-2 py-1 text-xs rounded-full bg-muted/60 flex items-center gap-1"
-                  style={{ borderLeft: `3px solid ${tech.color}` }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span>{tech.icon}</span>
-                  {tech.name}
-                </motion.span>
-              ))}
+              {project.technologies.map((tech) => {
+                const iconClass = getTechnologyIcon(tech.name);
+                console.log(`Tech: ${tech.name}, Icon: ${iconClass}`); // Debug log
+                return (
+                  <motion.span
+                    key={tech.name}
+                    className="px-2 py-1 text-xs rounded-full bg-muted/60 flex items-center gap-2"
+                    style={{ borderLeft: `3px solid ${tech.color}` }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <i className={`${iconClass} text-sm`}></i>
+                    {tech.name}
+                  </motion.span>
+                );
+              })}
             </div>
           </CardContent>
         </Card>

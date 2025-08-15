@@ -8,62 +8,62 @@ import { Project, Technology } from "@/types/project-showcase";
 export const TECHNOLOGIES: Record<string, Technology> = {
   REACT: {
     name: "React",
-    icon: "⚛️",
+    icon: "devicon-react-original",
     color: "#61DAFB",
   },
   TYPESCRIPT: {
     name: "TypeScript",
-    icon: "📘",
+    icon: "devicon-typescript-plain",
     color: "#3178C6",
   },
   NEXTJS: {
     name: "Next.js",
-    icon: "▲",
+    icon: "devicon-nextjs-original",
     color: "#000000",
   },
   TAILWIND: {
     name: "Tailwind CSS",
-    icon: "🎨",
+    icon: "devicon-tailwindcss-plain",
     color: "#06B6D4",
   },
   NODEJS: {
     name: "Node.js",
-    icon: "🟢",
+    icon: "devicon-nodejs-plain",
     color: "#339933",
   },
   PYTHON: {
     name: "Python",
-    icon: "🐍",
+    icon: "devicon-python-plain",
     color: "#3776AB",
   },
   OPENAI: {
     name: "OpenAI API",
-    icon: "🤖",
+    icon: "devicon-openai-original",
     color: "#412991",
   },
   MONGODB: {
     name: "MongoDB",
-    icon: "🍃",
+    icon: "devicon-mongodb-plain",
     color: "#47A248",
   },
   FIREBASE: {
     name: "Firebase",
-    icon: "🔥",
+    icon: "devicon-firebase-plain",
     color: "#FFCA28",
   },
   VITE: {
     name: "Vite",
-    icon: "⚡",
+    icon: "devicon-vitejs-plain",
     color: "#646CFF",
   },
   FRAMER_MOTION: {
     name: "Framer Motion",
-    icon: "🎭",
+    icon: "devicon-framer-plain",
     color: "#0055FF",
   },
   SHADCN: {
     name: "shadcn/ui",
-    icon: "🎯",
+    icon: "devicon-react-original",
     color: "#000000",
   },
 };

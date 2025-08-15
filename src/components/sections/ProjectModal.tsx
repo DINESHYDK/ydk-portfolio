@@ -3,7 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/types/project-showcase";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { X, ChevronLeft, ChevronRight, Github, ExternalLink, Play } from "lucide-react";
+import {
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Github,
+  ExternalLink,
+  Play,
+  Star,
+} from "lucide-react";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -13,6 +21,57 @@ interface ProjectModalProps {
   canNavigatePrev: boolean;
   canNavigateNext: boolean;
 }
+
+// Technology icon mapping (same as ProjectCard)
+const getTechnologyIcon = (techName: string) => {
+  const iconMap: Record<string, string> = {
+    // Exact matches from project data
+    React: "devicon-react-original",
+    TypeScript: "devicon-typescript-plain",
+    "Next.js": "devicon-nextjs-original",
+    "Tailwind CSS": "devicon-tailwindcss-plain",
+    "Node.js": "devicon-nodejs-plain",
+    Python: "devicon-python-plain",
+    "OpenAI API": "devicon-openai-original",
+    MongoDB: "devicon-mongodb-plain",
+    Firebase: "devicon-firebase-plain",
+    Vite: "devicon-vitejs-plain",
+    "Framer Motion": "devicon-framer-plain",
+    "shadcn/ui": "devicon-react-original",
+
+    // Additional common technologies
+    JavaScript: "devicon-javascript-plain",
+    HTML: "devicon-html5-plain",
+    CSS: "devicon-css3-plain",
+    "Vue.js": "devicon-vuejs-plain",
+    Angular: "devicon-angularjs-plain",
+    Java: "devicon-java-plain",
+    "C++": "devicon-cplusplus-plain",
+    "C#": "devicon-csharp-plain",
+    PHP: "devicon-php-plain",
+    Ruby: "devicon-ruby-plain",
+    Go: "devicon-go-plain",
+    PostgreSQL: "devicon-postgresql-plain",
+    MySQL: "devicon-mysql-plain",
+    Redis: "devicon-redis-plain",
+    SQLite: "devicon-sqlite-plain",
+    AWS: "devicon-amazonwebservices-original",
+    Azure: "devicon-azure-plain",
+    "Google Cloud": "devicon-googlecloud-plain",
+    Docker: "devicon-docker-plain",
+    Kubernetes: "devicon-kubernetes-plain",
+    Git: "devicon-git-plain",
+    GitHub: "devicon-github-original",
+    Figma: "devicon-figma-plain",
+    VSCode: "devicon-vscode-plain",
+    Vim: "devicon-vim-plain",
+    Linux: "devicon-linux-plain",
+    Windows: "devicon-windows8-original",
+    MacOS: "devicon-apple-original",
+  };
+
+  return iconMap[techName] || "devicon-javascript-plain";
+};
 
 export const ProjectModal = ({
   project,
@@ -31,10 +90,12 @@ export const ProjectModal = ({
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       const firstElement = focusableElements[0] as HTMLElement;
-      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+      const lastElement = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLElement;
 
       const handleTabKey = (e: KeyboardEvent) => {
-        if (e.key === 'Tab') {
+        if (e.key === "Tab") {
           if (e.shiftKey) {
             if (document.activeElement === firstElement) {
               e.preventDefault();
@@ -49,10 +110,10 @@ export const ProjectModal = ({
         }
       };
 
-      document.addEventListener('keydown', handleTabKey);
+      document.addEventListener("keydown", handleTabKey);
       firstElement?.focus();
 
-      return () => document.removeEventListener('keydown', handleTabKey);
+      return () => document.removeEventListener("keydown", handleTabKey);
     }
   }, [isOpen]);
 
@@ -85,12 +146,12 @@ export const ProjectModal = ({
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ 
-              duration: 0.3, 
+            transition={{
+              duration: 0.3,
               ease: "easeOut",
               type: "spring",
               stiffness: 300,
-              damping: 30
+              damping: 30,
             }}
           >
             {/* Header */}
@@ -104,7 +165,11 @@ export const ProjectModal = ({
                 />
                 <h2 className="text-2xl font-bold">{project.title}</h2>
                 {project.featured && (
-                  <Badge variant="secondary" className="bg-primary/20 text-primary">
+                  <Badge
+                    variant="secondary"
+                    className="bg-primary/20 text-primary flex items-center gap-1"
+                  >
+                    <Star className="w-3 h-3" />
                     Featured
                   </Badge>
                 )}
@@ -151,17 +216,17 @@ export const ProjectModal = ({
                   transition={{ delay: 0.2 }}
                 >
                   <Button
-                    onClick={() => window.open(project.githubUrl, '_blank')}
+                    onClick={() => window.open(project.githubUrl, "_blank")}
                     className="w-full bg-primary hover:bg-primary/90"
                   >
                     <Github className="w-4 h-4 mr-2" />
                     View Code on GitHub
                   </Button>
-                  
+
                   {project.demoUrl ? (
                     <Button
                       variant="outline"
-                      onClick={() => window.open(project.demoUrl, '_blank')}
+                      onClick={() => window.open(project.demoUrl, "_blank")}
                       className="w-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
                     >
                       <Play className="w-4 h-4 mr-2" />
@@ -200,22 +265,31 @@ export const ProjectModal = ({
                   <div>
                     <h3 className="text-lg font-semibold mb-3">Technologies</h3>
                     <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <motion.div
-                          key={tech.name}
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <Badge
-                            variant="outline"
-                            className="flex items-center gap-2 px-3 py-2"
-                            style={{ borderColor: tech.color, color: tech.color }}
+                      {project.technologies.map((tech) => {
+                        const iconClass = getTechnologyIcon(tech.name);
+                        console.log(
+                          `Modal Tech: ${tech.name}, Icon: ${iconClass}`
+                        ); // Debug log
+                        return (
+                          <motion.div
+                            key={tech.name}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.2 }}
                           >
-                            <span>{tech.icon}</span>
-                            {tech.name}
-                          </Badge>
-                        </motion.div>
-                      ))}
+                            <Badge
+                              variant="outline"
+                              className="flex items-center gap-2 px-3 py-2"
+                              style={{
+                                borderColor: tech.color,
+                                color: tech.color,
+                              }}
+                            >
+                              <i className={`${iconClass} text-lg`}></i>
+                              {tech.name}
+                            </Badge>
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -257,7 +331,7 @@ export const ProjectModal = ({
                     <ChevronLeft className="w-5 h-5" />
                   </motion.button>
                 )}
-                
+
                 {canNavigateNext && (
                   <motion.button
                     className="pointer-events-auto w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors mr-4"

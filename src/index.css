@@ -407,3 +407,56 @@
 .hover-scale:hover {
   transform: scale(1.02);
 }
+
+/* Devicon Icon Styling */
+.devicon {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.devicon-original {
+  color: inherit;
+}
+
+.devicon-plain {
+  color: inherit;
+}
+
+/* Technology badge icon sizing */
+.project-card .devicon,
+.project-modal .devicon {
+  font-size: 1.2em;
+}
+
+/* Skills section icon sizing */
+.skills-section .devicon {
+  font-size: 1.5em;
+}
+
+/* Ensure Devicon icons are visible and properly sized */
+.devicon {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Technology badge specific styling */
+.project-card .devicon,
+.project-modal .devicon {
+  font-size: 1.2em !important;
+  margin-right: 0.25rem !important;
+}
+
+/* Skills section specific styling */
+.skills-section .devicon {
+  font-size: 1.5em !important;
+  margin-right: 0.5rem !important;
+}
