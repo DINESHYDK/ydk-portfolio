@@ -48,6 +48,27 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 20%; /* Silver borders */
     --sidebar-ring: 160 84% 39%;
+
+    /* Command Palette Specific Colors */
+    --cp-background: 220 13% 9%; /* Deep dark background */
+    --cp-surface: 220 13% 12%; /* Slightly lighter surface */
+    --cp-border: 220 13% 18%; /* Border color */
+    --cp-glow: 266 100% 70%; /* Purple glow effect */
+    --cp-text-primary: 220 9% 95%; /* Primary text */
+    --cp-text-secondary: 220 9% 65%; /* Secondary text */
+    --cp-accent: 266 85% 58%; /* Accent color */
+    --cp-hover: 220 13% 15%; /* Hover state */
+    --cp-focus: 266 100% 80%; /* Focus state */
+    --cp-success: 160 84% 39%; /* Success/active state */
+    --cp-warning: 45 100% 60%; /* Warning state */
+    --cp-error: 0 84% 60%; /* Error state */
+
+    /* Command Palette Animation Properties */
+    --cp-animation-duration: 300ms;
+    --cp-animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --cp-border-radius: 12px;
+    --cp-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --cp-backdrop-blur: 24px;
   }
 }
 
@@ -90,13 +111,38 @@ All colors MUST be HSL.
   .glass-dark {
     background: linear-gradient(
       135deg,
-      hsl(var(--card) / 0.8),
-      hsl(var(--background) / 0.6)
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.08) 100%
     );
-    backdrop-filter: blur(14px) saturate(120%);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
-    border: 1px solid hsl(var(--border));
-    box-shadow: 0 12px 34px -12px hsl(var(--primary) / 0.25);
+    backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
+  .glass-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    mask:
+      linear-gradient(black, black) content-box,
+      linear-gradient(black, black);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
   }
 
   .gradient-text {
@@ -304,5 +350,390 @@ All colors MUST be HSL.
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+/* Command Palette Specific Utilities */
+@layer components {
+  .cp-container {
+    background: hsl(var(--cp-background));
+    border: 1px solid hsl(var(--cp-border));
+    border-radius: var(--cp-border-radius);
+    box-shadow: var(--cp-shadow);
+    backdrop-filter: blur(var(--cp-backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--cp-backdrop-blur));
+  }
+
+  .cp-surface {
+    background: hsl(var(--cp-surface));
+    border: 1px solid hsl(var(--cp-border));
+    border-radius: calc(var(--cp-border-radius) - 2px);
+  }
+
+  .cp-glow {
+    box-shadow:
+      0 0 20px hsl(var(--cp-glow) / 0.3),
+      0 0 40px hsl(var(--cp-glow) / 0.2),
+      0 0 80px hsl(var(--cp-glow) / 0.1);
+  }
+
+  .cp-glow-border {
+    position: relative;
+    background: hsl(var(--cp-surface));
+    border-radius: var(--cp-border-radius);
+  }
+
+  .cp-glow-border::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      45deg,
+      hsl(var(--cp-glow)),
+      hsl(var(--cp-accent)),
+      hsl(var(--cp-glow))
+    );
+    border-radius: var(--cp-border-radius);
+    z-index: -1;
+    opacity: 0.6;
+    animation: cp-border-glow 3s ease-in-out infinite;
+  }
+
+  .cp-hover {
+    transition: all var(--cp-animation-duration) var(--cp-animation-timing);
+  }
+
+  .cp-hover:hover {
+    background: hsl(var(--cp-hover));
+    transform: translateY(-1px);
+    box-shadow:
+      0 4px 12px hsl(var(--cp-glow) / 0.2),
+      0 2px 4px hsl(var(--cp-glow) / 0.1);
+  }
+
+  .cp-focus {
+    outline: 2px solid hsl(var(--cp-focus));
+    outline-offset: 2px;
+  }
+
+  @keyframes cp-border-glow {
+    0%,
+    100% {
+      opacity: 0.6;
+      filter: hue-rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      filter: hue-rotate(90deg);
+    }
+  }
+
+  @keyframes cp-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes cp-slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes cp-scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .cp-animate-in {
+    animation: cp-slide-in var(--cp-animation-duration)
+      var(--cp-animation-timing);
+  }
+
+  .animate-fade-in {
+    animation: fade-in 300ms ease-in-out;
+  }
+
+  .animate-scale-in {
+    animation: cp-scale-in var(--cp-animation-duration)
+      var(--cp-animation-timing);
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .cp-animate-in,
+    .animate-fade-in,
+    .animate-scale-in {
+      animation: none;
+    }
+
+    .cp-hover {
+      transition: none;
+    }
+
+    .cp-hover:hover {
+      transform: none;
+    }
+  }
+
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+/* GlowingBorder Component Styles */
+@layer components {
+  @keyframes glowing-border-animation {
+    0% {
+      background-position:
+        0% 50%,
+        50% 0%,
+        100% 50%,
+        50% 100%;
+      opacity: 0.6;
+    }
+    25% {
+      background-position:
+        100% 50%,
+        50% 0%,
+        0% 50%,
+        50% 100%;
+      opacity: 0.8;
+    }
+    50% {
+      background-position:
+        100% 50%,
+        50% 100%,
+        0% 50%,
+        50% 0%;
+      opacity: 1;
+    }
+    75% {
+      background-position:
+        0% 50%,
+        50% 100%,
+        100% 50%,
+        50% 0%;
+      opacity: 0.8;
+    }
+    100% {
+      background-position:
+        0% 50%,
+        50% 0%,
+        100% 50%,
+        50% 100%;
+      opacity: 0.6;
+    }
+  }
+
+  .glowing-border-container:hover .glowing-border-gradient {
+    opacity: 1;
+  }
+
+  .glowing-border-container:hover .glowing-border-static {
+    opacity: 0;
+  }
+
+  .glowing-border-container:hover .glowing-border-glow {
+    opacity: var(--glow-opacity);
+  }
+
+  .glowing-border-container:focus-within .glowing-border-gradient {
+    opacity: 1;
+    animation-duration: calc(var(--animation-duration) * 0.5);
+  }
+
+  .glowing-border-container:focus-within .glowing-border-static {
+    opacity: 0;
+  }
+
+  .glowing-border-container:focus-within .glowing-border-glow {
+    opacity: calc(var(--glow-opacity) * 1.5);
+  }
+
+  /* Performance optimizations for GlowingBorder */
+  .glowing-border-container * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Reduced motion support for GlowingBorder */
+  @media (prefers-reduced-motion: reduce) {
+    .glowing-border-gradient {
+      animation: none !important;
+    }
+
+    .glowing-border-container:hover .glowing-border-gradient,
+    .glowing-border-container:focus-within .glowing-border-gradient {
+      opacity: 0.8;
+    }
+  }
+}
+
+/* BackgroundEffects Component Styles */
+@layer components {
+  /* Parallax animation classes */
+  .cp-parallax-slow {
+    animation: cp-parallax-slow 20s ease-in-out infinite;
+  }
+
+  .cp-parallax-medium {
+    animation: cp-parallax-medium 15s ease-in-out infinite;
+  }
+
+  .cp-parallax-fast {
+    animation: cp-parallax-fast 12s ease-in-out infinite;
+  }
+
+  /* Mesh gradient animation */
+  .cp-mesh-animation {
+    animation: cp-mesh-gradient 25s ease-in-out infinite;
+  }
+
+  @keyframes cp-parallax-slow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate3d(-10px, -15px, 0) rotate(1deg);
+    }
+    50% {
+      transform: translate3d(5px, -10px, 0) rotate(-0.5deg);
+    }
+    75% {
+      transform: translate3d(-5px, 10px, 0) rotate(0.5deg);
+    }
+  }
+
+  @keyframes cp-parallax-medium {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    33% {
+      transform: translate3d(15px, -10px, 0) scale(1.05);
+    }
+    66% {
+      transform: translate3d(-10px, 15px, 0) scale(0.98);
+    }
+  }
+
+  @keyframes cp-parallax-fast {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+    20% {
+      transform: translate3d(8px, -12px, 0) rotate(0.5deg) scale(1.02);
+    }
+    40% {
+      transform: translate3d(-6px, 8px, 0) rotate(-0.3deg) scale(0.99);
+    }
+    60% {
+      transform: translate3d(10px, 5px, 0) rotate(0.2deg) scale(1.01);
+    }
+    80% {
+      transform: translate3d(-4px, -8px, 0) rotate(-0.1deg) scale(1);
+    }
+  }
+
+  @keyframes cp-mesh-gradient {
+    0%,
+    100% {
+      background-position:
+        0% 0%,
+        100% 100%,
+        50% 50%,
+        25% 75%;
+      opacity: 0.2;
+    }
+    25% {
+      background-position:
+        25% 25%,
+        75% 75%,
+        100% 0%,
+        0% 100%;
+      opacity: 0.3;
+    }
+    50% {
+      background-position:
+        50% 50%,
+        50% 50%,
+        0% 100%,
+        100% 0%;
+      opacity: 0.25;
+    }
+    75% {
+      background-position:
+        75% 25%,
+        25% 75%,
+        75% 25%,
+        50% 50%;
+      opacity: 0.35;
+    }
+  }
+
+  /* Performance optimizations for BackgroundEffects */
+  .cp-parallax-slow,
+  .cp-parallax-medium,
+  .cp-parallax-fast,
+  .cp-mesh-animation {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  /* Reduced motion support for BackgroundEffects */
+  @media (prefers-reduced-motion: reduce) {
+    .cp-parallax-slow,
+    .cp-parallax-medium,
+    .cp-parallax-fast,
+    .cp-mesh-animation {
+      animation: none !important;
+      transform: translate3d(0, 0, 0) !important;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .cp-parallax-slow,
+    .cp-parallax-medium,
+    .cp-parallax-fast,
+    .cp-mesh-animation {
+      opacity: 0.1 !important;
+    }
   }
 }
