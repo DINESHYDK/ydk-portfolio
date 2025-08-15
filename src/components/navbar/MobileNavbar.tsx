@@ -22,20 +22,20 @@ export function MobileNavbar({
 }) {
   return (
     <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[85%] max-w-sm">
-      <div className="glass-dark rounded-full px-2 py-2 border shadow-lg">
+      <div className="navbar-glass rounded-full px-2 py-2 border shadow-lg">
         <ul className="flex items-center justify-between">
           {LINKS.map(({ id, label, icon: Icon }) => (
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`flex items-center justify-center p-3 rounded-full transition-all duration-200 hover:bg-muted/50 hover:scale-110 ${
+                className={`flex items-center justify-center p-3 rounded-full transition-all duration-300 ease-in-out hover:bg-muted/50 hover:scale-110 ${
                   activeId === id
                     ? "bg-muted text-primary font-medium scale-105"
                     : ""
                 }`}
                 aria-label={label}
               >
-                <Icon className="h-5 w-5" />
+                <Icon className="h-[0.85rem] w-[0.85rem]" />
               </a>
             </li>
           ))}

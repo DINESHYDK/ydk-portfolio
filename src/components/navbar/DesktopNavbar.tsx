@@ -37,14 +37,14 @@ export function DesktopNavbar({
   };
 
   return (
-    <nav className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[75vw] max-w-4xl">
-      <div className="glass-dark rounded-full px-6 py-3 shadow-lg border animate-fade-in w-full">
+    <nav className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[70%] max-w-4xl">
+      <div className="navbar-glass rounded-full px-6 py-3 shadow-lg border animate-fade-in w-full">
         <ul className="flex items-center justify-between">
           <li>
             <motion.button
               aria-label="YDK Logo"
               onClick={handleEaster}
-              className="relative px-4 py-2 rounded-full hover:bg-muted/50 transition-colors"
+              className="relative px-4 py-2 rounded-full hover:bg-muted/50 transition-all duration-300 ease-in-out"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -76,7 +76,7 @@ export function DesktopNavbar({
               <a
                 key={id}
                 href={`#${id}`}
-                className={`flex items-center gap-2 px-3 py-2 rounded-full transition-colors hover:bg-muted/50 ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 ease-in-out hover:bg-muted/50 ${
                   activeId === id ? "bg-muted text-primary font-medium" : ""
                 }`}
               >
