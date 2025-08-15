@@ -49,7 +49,7 @@ export function DesktopNavbar({
               whileTap={{ scale: 0.95 }}
             >
               <motion.span
-                className="text-xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
                 whileHover={{
                   backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                 }}
@@ -65,7 +65,7 @@ export function DesktopNavbar({
                 YDK
               </motion.span>
               <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 via-purple-500/20 to-pink-500/20 opacity-0"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 opacity-0"
                 whileHover={{ opacity: 1, scale: 1.2 }}
                 transition={{ duration: 0.3 }}
               />

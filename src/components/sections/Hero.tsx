@@ -75,7 +75,7 @@ export const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <GradientText
-                colors={["#64ffda", "#4079ff", "#64ffda", "#40a9ff", "#64ffda"]}
+                colors={["#00d4ff", "#8b5cf6", "#00d4ff", "#00e6ff", "#00d4ff"]}
                 animationSpeed={4}
                 showBorder={true}
                 className="text-5xl md:text-7xl font-extrabold"
@@ -139,7 +139,7 @@ export const Hero = () => {
           transition={{ duration: 0.4, delay: 0.15 }}
         >
           <InteractiveHoverButton
-            className="w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg"
+            className="w-auto px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg"
             onClick={() => {
               // Navigate to resume or open resume
               window.open("/resume", "_blank");
@@ -149,7 +149,7 @@ export const Hero = () => {
           </InteractiveHoverButton>
 
           <InteractiveHoverButton
-            className="w-auto px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg"
+            className="w-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold rounded-lg shadow-lg"
             onClick={() => {
               // Scroll to contact section
               const contactSection = document.getElementById("contact");

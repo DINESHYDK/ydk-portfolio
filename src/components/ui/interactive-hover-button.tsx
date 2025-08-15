@@ -42,9 +42,9 @@ const InteractiveHoverButton = React.forwardRef<
             scale: 1,
             opacity: 1,
             background: [
-              "radial-gradient(circle at 20% 80%, #120a8f 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 20%, #120a8f 0%, transparent 50%)",
-              "radial-gradient(circle at 40% 40%, #120a8f 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 80%, #00d4ff 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 20%, #8b5cf6 0%, transparent 50%)",
+              "radial-gradient(circle at 40% 40%, #00e6ff 0%, transparent 50%)",
             ],
           },
         }}
@@ -59,7 +59,7 @@ const InteractiveHoverButton = React.forwardRef<
         }}
       />
       <motion.div
-        className="absolute inset-0 z-0 h-full w-full rounded-md bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0"
+        className="absolute inset-0 z-0 h-full w-full rounded-md bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-0"
         variants={{
           hover: { opacity: 0.8 },
         }}

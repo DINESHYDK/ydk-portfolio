@@ -10,7 +10,7 @@ interface GradientTextProps {
 
 const GradientText: React.FC<GradientTextProps> = ({
   children,
-  colors = ["#64ffda", "#4079ff", "#64ffda", "#4079ff", "#64ffda"],
+  colors = ["#00d4ff", "#8b5cf6", "#00d4ff", "#8b5cf6", "#00d4ff"],
   animationSpeed = 3,
   showBorder = false,
   className = "",
@@ -23,7 +23,7 @@ const GradientText: React.FC<GradientTextProps> = ({
     color: "transparent",
     animationDuration: `${animationSpeed}s`,
     ...(showBorder && {
-      WebkitTextStroke: "1px rgba(100, 255, 218, 0.3)",
+      WebkitTextStroke: "1px rgba(0, 212, 255, 0.3)",
     }),
   };
 

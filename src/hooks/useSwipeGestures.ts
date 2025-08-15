@@ -30,6 +30,7 @@ export function useSwipeGestures(options: SwipeGestureOptions) {
     preventScroll = false,
   } = options;
 
+  
   const touchStart = useRef<TouchPoint | null>(null);
   const touchEnd = useRef<TouchPoint | null>(null);
 
