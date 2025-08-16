@@ -10,6 +10,7 @@ import ProfileCard from "@/components/ui/ProfileCard";
 import GradientText from "@/components/ui/GradientText";
 import TextTypeOptimized from "@/components/ui/TextTypeOptimized";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import SplitText from "../../../react_bits/SplitText/SplitText";
 
 export const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -68,24 +69,26 @@ export const Hero = () => {
 
           {/* Right: Name and intro */}
           <div className="md:col-span-7 text-center md:text-left space-y-5">
-            <motion.h1
+            <motion.div
               className="text-5xl md:text-7xl font-extrabold relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <GradientText
-                colors={["#00d4ff", "#8b5cf6", "#00d4ff", "#00e6ff", "#00d4ff"]}
-                animationSpeed={4}
-                showBorder={true}
-                className="text-5xl md:text-7xl font-extrabold"
-              >
-                Y. Dinesh Krishna
-              </GradientText>
-            </motion.h1>
+              <SplitText
+                text="Y. Dinesh Krishna"
+                className="text-5xl md:text-7xl font-extrabold text-primary"
+                splitType="chars"
+                delay={80}
+                duration={1.2}
+                from={{ opacity: 0, y: 100, rotationX: -90, scale: 0.5 }}
+                to={{ opacity: 1, y: 0, rotationX: 0, scale: 1 }}
+                ease="back.out(1.7)"
+              />
+            </motion.div>
 
             <motion.div
-              className="text-lg md:text-xl text-muted-foreground max-w-2xl md:max-w-none mx-auto md:mx-0"
+              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl md:max-w-none mx-auto md:mx-0 font-medium"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -96,36 +99,39 @@ export const Hero = () => {
                 pauseDuration={1500}
                 showCursor={true}
                 cursorCharacter="|"
-                className="text-lg md:text-xl text-muted-foreground"
+                className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium font-sans"
                 loop={true}
                 startDelay={800}
               />
             </motion.div>
 
-            <div className="flex items-center justify-center md:justify-start gap-2">
+            <div className="flex items-center justify-center md:justify-start gap-3">
               <motion.a
-                whileHover={{ scale: 1.15, rotate: 3 }}
-                className="p-2 rounded-full hover:bg-muted/60 transition-colors"
+                whileHover={{ scale: 1.1, rotate: 2 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="https://github.com/yourhandle"
                 aria-label="GitHub"
               >
-                <GitHubLogoIcon className="h-5 w-5" />
+                <GitHubLogoIcon className="h-6 w-6" />
               </motion.a>
               <motion.a
-                whileHover={{ scale: 1.15, rotate: -3 }}
-                className="p-2 rounded-full hover:bg-muted/60 transition-colors"
+                whileHover={{ scale: 1.1, rotate: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="https://www.linkedin.com/in/yourhandle/"
                 aria-label="LinkedIn"
               >
-                <LinkedInLogoIcon className="h-5 w-5" />
+                <LinkedInLogoIcon className="h-6 w-6" />
               </motion.a>
               <motion.a
-                whileHover={{ scale: 1.15 }}
-                className="p-2 rounded-full hover:bg-muted/60 transition-colors"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="#contact"
                 aria-label="Email"
               >
-                <EnvelopeClosedIcon className="h-5 w-5" />
+                <EnvelopeClosedIcon className="h-6 w-6" />
               </motion.a>
             </div>
           </div>

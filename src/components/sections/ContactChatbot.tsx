@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Bot, User, Sparkles, MessageCircle, Zap } from "lucide-react";
+import SplitText from "../../../react_bits/SplitText/SplitText";
 
 interface Message {
   id: string;
@@ -209,9 +210,23 @@ export const ContactChatbot = () => {
               />
             </motion.div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold gradient-text-animated">
-                Chat with DK
-              </h2>
+              <SplitText
+                text="Chat with DK"
+                className="text-3xl md:text-4xl font-bold gradient-text-animated"
+                splitType="chars"
+                delay={60}
+                duration={0.8}
+                from={{
+                  opacity: 0,
+                  y: 50,
+                  rotationX: -90,
+                }}
+                to={{
+                  opacity: 1,
+                  y: 0,
+                  rotationX: 0,
+                }}
+              />
               <p className="text-sm text-muted-foreground">Your AI Assistant</p>
             </div>
           </div>

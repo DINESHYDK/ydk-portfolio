@@ -5,6 +5,7 @@ import { SAMPLE_PROJECTS, getProjectCounts } from "@/data/projects";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectModal } from "./ProjectModal";
 import { FilterButton } from "./FilterButton";
+import SplitText from "../../../react_bits/SplitText/SplitText";
 
 export const ProjectShowcase = () => {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("All");
@@ -95,15 +96,23 @@ export const ProjectShowcase = () => {
     <section id="projects" className="py-20">
       <div className="container">
         <header className="mb-10 text-center">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            Projects
-          </motion.h2>
+          <SplitText
+            text="Projects"
+            className="text-3xl md:text-4xl font-bold text-primary mb-3"
+            splitType="chars"
+            delay={60}
+            duration={0.8}
+            from={{
+              opacity: 0,
+              y: 50,
+              rotationX: -90,
+            }}
+            to={{
+              opacity: 1,
+              y: 0,
+              rotationX: 0,
+            }}
+          />
           <motion.p
             className="text-muted-foreground mt-2"
             initial={{ opacity: 0, y: 20 }}
@@ -179,17 +188,17 @@ export const ProjectShowcase = () => {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        {/* Project Modal */}
-        <ProjectModal
-          project={selectedProject}
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          onNavigate={handleNavigate}
-          canNavigatePrev={filteredProjects.length > 1}
-          canNavigateNext={filteredProjects.length > 1}
-        />
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onNavigate={handleNavigate}
+        hasNext={filteredProjects.length > 1}
+        hasPrev={filteredProjects.length > 1}
+      />
     </section>
   );
 };
