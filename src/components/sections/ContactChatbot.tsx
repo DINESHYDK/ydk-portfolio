@@ -154,6 +154,7 @@ export const ContactChatbot = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2 }}
       className="flex justify-start"
     >
       <div className="flex items-center space-x-2 bg-muted px-4 py-3 rounded-2xl rounded-bl-md">
@@ -272,14 +273,19 @@ export const ContactChatbot = () => {
 
               {/* Messages Area */}
               <div className="max-h-[500px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-background/50 to-background/80">
-                <AnimatePresence>
+                <AnimatePresence mode="popLayout">
                   {messages.map((message, index) => (
                     <motion.div
                       key={message.id}
+                      layout
                       initial={{ opacity: 0, y: 20, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.1,
+                        layout: { duration: 0.2 },
+                      }}
                       className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       <div
@@ -373,7 +379,7 @@ export const ContactChatbot = () => {
                     <motion.div
                       className="absolute right-3 top-1/2 transform -translate-y-1/2"
                       animate={{ rotate: input ? 0 : 180 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
                     >
                       <MessageCircle className="w-4 h-4 text-muted-foreground" />
                     </motion.div>
@@ -382,6 +388,7 @@ export const ContactChatbot = () => {
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     <Button
                       onClick={onSubmit}
