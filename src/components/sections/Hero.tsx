@@ -41,10 +41,10 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="container w-full">
-        <div className="grid items-center gap-8 md:grid-cols-12">
+      <div className="container w-full pt-6 pr-4 md:pt-4 md:pr-0 lg:pt-8">
+        <div className="grid items-center gap-6 md:gap-8 lg:gap-12 md:grid-cols-12">
           {/* Left: Tilt Card (approx 40%) */}
-          <div className="md:col-span-5 flex justify-center items-center mb-8 md:mb-0">
+          <div className="md:col-span-5 flex justify-center items-center mb-8 md:mb-0 -ml-4 md:ml-0">
             <ProfileCard
               avatarUrl="/DineshProfile.png"
               miniAvatarUrl="/DineshProfile.png"
@@ -54,7 +54,7 @@ export const Hero = () => {
               status="Available for work"
               contactText="Wanna Talk?"
               enableTilt={true}
-              enableMobileTilt={true}
+              enableMobileTilt={false}
               showUserInfo={true}
               onContactClick={() => {
                 // Scroll to contact section
@@ -63,21 +63,21 @@ export const Hero = () => {
                   contactSection.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="w-full max-w-sm mx-auto"
+              className="w-full max-w-xs sm:max-w-sm mx-auto"
             />
           </div>
 
           {/* Right: Name and intro */}
-          <div className="md:col-span-7 text-center md:text-left space-y-5">
+          <div className="md:col-span-7 text-center md:text-left space-y-4 md:space-y-5">
             <motion.div
-              className="text-5xl md:text-7xl font-extrabold relative"
+              className="relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <SplitText
                 text="Y. Dinesh Krishna"
-                className="text-5xl md:text-7xl font-extrabold text-primary"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary whitespace-nowrap"
                 splitType="chars"
                 delay={80}
                 duration={1.2}
@@ -139,7 +139,7 @@ export const Hero = () => {
 
         {/* Buttons row beneath both columns */}
         <motion.div
-          className="mt-8 flex items-center justify-center gap-4"
+          className="mt-6 md:mt-8 flex items-center justify-center gap-4"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.15 }}

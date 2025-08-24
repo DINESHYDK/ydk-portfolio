@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Send, Bot, User, Sparkles, MessageCircle, Zap } from "lucide-react";
+import { Send, User, Sparkles, MessageCircle } from "lucide-react";
 import SplitText from "../../../react_bits/SplitText/SplitText";
 
 interface Message {
@@ -39,6 +39,7 @@ const steps = [
 type StepId = (typeof steps)[number]["id"];
 
 export const ContactChatbot = () => {
+  const [mode, setMode] = useState<"chat" | "form">("chat");
   const [messages, setMessages] = useState<Message[]>([
     {
       id: crypto.randomUUID(),
@@ -179,61 +180,54 @@ export const ContactChatbot = () => {
 
   return (
     <section id="contact" className="py-20 relative">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-accent/10 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
-
       <div className="container max-w-4xl relative">
         <motion.header
-          className="mb-8 text-center"
+          className="mb-6 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <motion.div
-              className="relative"
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-                <Bot className="w-6 h-6 text-white" />
-              </div>
-              <motion.div
-                className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </motion.div>
-            <div>
-              <SplitText
-                text="Chat with DK"
-                className="text-3xl md:text-4xl font-bold gradient-text-animated"
-                splitType="chars"
-                delay={60}
-                duration={0.8}
-                from={{
-                  opacity: 0,
-                  y: 50,
-                  rotationX: -90,
-                }}
-                to={{
-                  opacity: 1,
-                  y: 0,
-                  rotationX: 0,
-                }}
-              />
-              <p className="text-sm text-muted-foreground">Your AI Assistant</p>
+          <div className="flex items-center justify-center space-x-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold">
+              DK
             </div>
+            <SplitText
+              text={mode === "chat" ? "Chat with DK" : "Contact Dinesh"}
+              className="text-3xl md:text-4xl font-bold text-primary"
+              splitType="chars"
+              delay={60}
+              duration={0.6}
+              from={{ opacity: 0, y: 40, rotationX: -90 }}
+              to={{ opacity: 1, y: 0, rotationX: 0 }}
+            />
           </div>
-          <p className="text-muted-foreground">
-            Ready to connect? DK will help you get in touch with Dinesh! ✨
+          <p className="text-muted-foreground text-sm">
+            {mode === "chat"
+              ? "Quick guided chat to send your message."
+              : "Reach me directly via socials or the form."}
           </p>
+          <div className="mt-4 inline-flex rounded-full border border-primary/30 overflow-hidden">
+            <button
+              className={`px-4 py-2 text-sm ${
+                mode === "chat"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-foreground"
+              }`}
+              onClick={() => setMode("chat")}
+            >
+              Chatbot
+            </button>
+            <button
+              className={`px-4 py-2 text-sm ${
+                mode === "form"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-transparent text-foreground"
+              }`}
+              onClick={() => setMode("form")}
+            >
+              Contact Form
+            </button>
+          </div>
         </motion.header>
 
         <motion.div
@@ -241,173 +235,234 @@ export const ContactChatbot = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <Card className="glass-dark border-primary/20 shadow-2xl overflow-hidden">
+          <Card className="glass-dark border-primary/20 shadow-xl overflow-hidden">
             <CardContent className="p-0">
-              {/* Chat Header */}
-              <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-4 border-b border-primary/20">
-                <div className="flex items-center space-x-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-                      <Bot className="w-5 h-5 text-white" />
+              {mode === "form" ? (
+                <div className="p-6 grid gap-4 md:grid-cols-2">
+                  <div className="md:col-span-2">
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Prefer a direct reach-out? Use the form or ping me on
+                      socials.
+                    </p>
+                    <div className="flex gap-3">
+                      <a
+                        href="https://github.com/yourhandle"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3 py-2 rounded-md border hover:bg-white/5"
+                      >
+                        GitHub
+                      </a>
+                      <a
+                        href="https://www.linkedin.com/in/yourhandle/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3 py-2 rounded-md border hover:bg-white/5"
+                      >
+                        LinkedIn
+                      </a>
+                      <a
+                        href="mailto:you@example.com"
+                        className="px-3 py-2 rounded-md border hover:bg-white/5"
+                      >
+                        Email
+                      </a>
                     </div>
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-background animate-pulse" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">
-                      DK Assistant
-                    </h3>
-                    <p className="text-xs text-green-400 flex items-center space-x-1">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                      <span>Online & Ready to Help</span>
-                    </p>
-                  </div>
-                  <div className="ml-auto flex space-x-1">
-                    <Sparkles className="w-4 h-4 text-accent animate-pulse" />
-                    <Zap
-                      className="w-4 h-4 text-primary animate-bounce"
-                      style={{ animationDelay: "0.5s" }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Messages Area */}
-              <div className="max-h-[500px] overflow-y-auto p-6 space-y-4 bg-gradient-to-b from-background/50 to-background/80">
-                <AnimatePresence mode="popLayout">
-                  {messages.map((message, index) => (
-                    <motion.div
-                      key={message.id}
-                      layout
-                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                      transition={{
-                        duration: 0.3,
-                        delay: 0.1,
-                        layout: { duration: 0.2 },
-                      }}
-                      className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                    >
-                      <div
-                        className={`flex items-end space-x-2 max-w-[80%] ${message.role === "user" ? "flex-row-reverse space-x-reverse" : ""}`}
-                      >
-                        {/* Avatar */}
-                        <motion.div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                            message.role === "user"
-                              ? "bg-gradient-to-br from-accent to-primary"
-                              : "bg-gradient-to-br from-primary to-accent"
-                          }`}
-                          whileHover={{ scale: 1.1 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 20,
-                          }}
-                        >
-                          {message.role === "user" ? (
-                            <User className="w-4 h-4 text-white" />
-                          ) : (
-                            <Bot className="w-4 h-4 text-white" />
-                          )}
-                        </motion.div>
-
-                        {/* Message Bubble */}
-                        <motion.div
-                          className={`px-4 py-3 rounded-2xl relative ${
-                            message.role === "user"
-                              ? "bg-gradient-to-br from-primary to-accent text-white rounded-br-md"
-                              : "bg-muted/80 backdrop-blur-sm border border-primary/10 rounded-bl-md"
-                          }`}
-                          whileHover={{ scale: 1.02 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 20,
-                          }}
-                        >
-                          <div
-                            className={`text-sm leading-relaxed ${message.role === "user" ? "text-white" : "text-foreground"}`}
-                            dangerouslySetInnerHTML={{
-                              __html: formatMessage(message.text),
-                            }}
-                          />
-                          <div
-                            className={`text-xs mt-1 opacity-70 ${message.role === "user" ? "text-white/70" : "text-muted-foreground"}`}
-                          >
-                            {message.timestamp.toLocaleTimeString([], {
-                              hour: "2-digit",
-                              minute: "2-digit",
-                            })}
-                          </div>
-
-                          {/* Message tail */}
-                          <div
-                            className={`absolute bottom-0 w-3 h-3 ${
-                              message.role === "user"
-                                ? "right-0 bg-gradient-to-br from-primary to-accent transform rotate-45 translate-x-1/2 translate-y-1/2"
-                                : "left-0 bg-muted/80 transform rotate-45 -translate-x-1/2 translate-y-1/2"
-                            }`}
-                          />
-                        </motion.div>
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* Typing Indicator */}
-                  {showTypingIndicator && <TypingIndicator />}
-                </AnimatePresence>
-                <div ref={endRef} />
-              </div>
-
-              {/* Input Area */}
-              <div className="p-4 border-t border-primary/20 bg-gradient-to-r from-background/80 to-background/60 backdrop-blur-sm">
-                <div className="flex items-center space-x-3">
-                  <div className="flex-1 relative">
                     <Input
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      placeholder={
-                        steps[stepIndex]?.placeholder || "Type your message..."
+                      placeholder="Your name"
+                      value={values.name ?? ""}
+                      onChange={(e) =>
+                        setValues({ ...values, name: e.target.value })
                       }
-                      onKeyDown={(e) =>
-                        e.key === "Enter" && !e.shiftKey && onSubmit()
-                      }
-                      className="pr-12 bg-background/50 border-primary/20 focus:border-primary/40 rounded-full"
-                      disabled={isTyping}
                     />
-                    <motion.div
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                      animate={{ rotate: input ? 0 : 180 }}
-                      transition={{ duration: 0.2, ease: "easeInOut" }}
-                    >
-                      <MessageCircle className="w-4 h-4 text-muted-foreground" />
-                    </motion.div>
                   </div>
-
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  >
+                  <div>
+                    <Input
+                      placeholder="your.email@example.com"
+                      value={values.email ?? ""}
+                      onChange={(e) =>
+                        setValues({ ...values, email: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Input
+                      placeholder="Your message"
+                      value={values.message ?? ""}
+                      onChange={(e) =>
+                        setValues({ ...values, message: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="md:col-span-2 flex justify-end">
                     <Button
-                      onClick={onSubmit}
-                      disabled={!input.trim() || isTyping}
-                      className="rounded-full w-12 h-12 p-0 bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-lg"
+                      onClick={() =>
+                        toast.success("Thanks! I'll get back to you soon.")
+                      }
+                      className="bg-primary text-primary-foreground"
                     >
-                      <Send className="w-4 h-4" />
+                      Send
                     </Button>
-                  </motion.div>
-                </div>
-
-                {/* Quick Actions */}
-                <div className="flex items-center justify-center mt-3 space-x-2">
-                  <div className="text-xs text-muted-foreground flex items-center space-x-1">
-                    <Sparkles className="w-3 h-3" />
-                    <span>Powered by DK AI</span>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <>
+                  <div className="bg-muted/40 p-4 border-b border-primary/20">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold">
+                        DK
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-foreground">
+                          DK Assistant
+                        </h3>
+                        <p className="text-xs text-muted-foreground">Online</p>
+                      </div>
+                      <div className="ml-auto" />
+                    </div>
+                  </div>
+
+                  {/* Messages Area */}
+                  <div className="max-h-[500px] overflow-y-auto p-6 space-y-4 bg-background/60">
+                    <AnimatePresence mode="popLayout">
+                      {messages.map((message, index) => (
+                        <motion.div
+                          key={message.id}
+                          layout
+                          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                          transition={{
+                            duration: 0.3,
+                            delay: 0.1,
+                            layout: { duration: 0.2 },
+                          }}
+                          className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                        >
+                          <div
+                            className={`flex items-end space-x-2 max-w-[80%] ${message.role === "user" ? "flex-row-reverse space-x-reverse" : ""}`}
+                          >
+                            {/* Avatar */}
+                            <motion.div
+                              className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                message.role === "user"
+                                  ? "bg-gradient-to-br from-accent to-primary"
+                                  : "bg-gradient-to-br from-primary to-accent"
+                              }`}
+                              whileHover={{ scale: 1.1 }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 20,
+                              }}
+                            >
+                              {message.role === "user" ? (
+                                <User className="w-4 h-4 text-white" />
+                              ) : (
+                                <span className="text-[10px] font-bold text-white">
+                                  DK
+                                </span>
+                              )}
+                            </motion.div>
+
+                            {/* Message Bubble */}
+                            <motion.div
+                              className={`px-4 py-3 rounded-2xl relative ${
+                                message.role === "user"
+                                  ? "bg-gradient-to-br from-primary to-accent text-white rounded-br-md"
+                                  : "bg-muted/80 backdrop-blur-sm border border-primary/10 rounded-bl-md"
+                              }`}
+                              whileHover={{ scale: 1.02 }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 300,
+                                damping: 20,
+                              }}
+                            >
+                              <div
+                                className={`text-sm leading-relaxed ${message.role === "user" ? "text-white" : "text-foreground"}`}
+                                dangerouslySetInnerHTML={{
+                                  __html: formatMessage(message.text),
+                                }}
+                              />
+                              <div
+                                className={`text-xs mt-1 opacity-70 ${message.role === "user" ? "text-white/70" : "text-muted-foreground"}`}
+                              >
+                                {message.timestamp.toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </div>
+
+                              {/* Message tail */}
+                              <div
+                                className={`absolute bottom-0 w-3 h-3 ${
+                                  message.role === "user"
+                                    ? "right-0 bg-gradient-to-br from-primary to-accent transform rotate-45 translate-x-1/2 translate-y-1/2"
+                                    : "left-0 bg-muted/80 transform rotate-45 -translate-x-1/2 translate-y-1/2"
+                                }`}
+                              />
+                            </motion.div>
+                          </div>
+                        </motion.div>
+                      ))}
+
+                      {/* Typing Indicator */}
+                      {showTypingIndicator && <TypingIndicator />}
+                    </AnimatePresence>
+                    <div ref={endRef} />
+                  </div>
+
+                  {/* Input Area */}
+                  <div className="p-4 border-t border-primary/20 bg-background/60 backdrop-blur-sm">
+                    <div className="flex items-center space-x-3">
+                      <div className="flex-1 relative">
+                        <Input
+                          value={input}
+                          onChange={(e) => setInput(e.target.value)}
+                          placeholder={
+                            steps[stepIndex]?.placeholder ||
+                            "Type your message..."
+                          }
+                          onKeyDown={(e) =>
+                            e.key === "Enter" && !e.shiftKey && onSubmit()
+                          }
+                          className="pr-12 bg-background/50 border-primary/20 focus:border-primary/40 rounded-full"
+                          disabled={isTyping}
+                        />
+                        {null}
+                      </div>
+
+                      <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 25,
+                        }}
+                      >
+                        <Button
+                          onClick={onSubmit}
+                          disabled={!input.trim() || isTyping}
+                          className="rounded-full w-12 h-12 p-0 bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-lg"
+                        >
+                          <Send className="w-4 h-4" />
+                        </Button>
+                      </motion.div>
+                    </div>
+
+                    {/* Footer note */}
+                    <div className="flex items-center justify-center mt-3">
+                      <div className="text-xs text-muted-foreground">
+                        Powered by DK
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
         </motion.div>

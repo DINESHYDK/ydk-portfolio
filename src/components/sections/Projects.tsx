@@ -1,7 +1,7 @@
-import { ProjectShowcase } from "./ProjectShowcase";
+import { ProjectsRedesign } from "./ProjectsRedesign";
 
 export const Projects = () => {
-  return <ProjectShowcase />;
+  return <ProjectsRedesign />;
 };
 
 export default Projects;
