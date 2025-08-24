@@ -18,8 +18,6 @@ export const Hero = () => {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 40]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   const introTexts = ["AI Engineer", "Coding Enthusiast", "Web Developer"];
 
@@ -27,19 +25,9 @@ export const Hero = () => {
     <section
       id="home"
       ref={ref}
-      className="relative min-h-[92vh] flex items-center"
+      className="relative min-h-[92vh] flex items-center bg-background"
     >
-      <div className="absolute inset-0 -z-10">
-        {/* Gradient beams with parallax */}
-        <motion.div
-          style={{ y: y1 }}
-          className="absolute -top-20 left-1/3 h-64 w-64 rounded-full bg-primary/20 blur-3xl"
-        />
-        <motion.div
-          style={{ y: y2 }}
-          className="absolute bottom-10 right-1/4 h-72 w-72 rounded-full bg-accent/20 blur-3xl"
-        />
-      </div>
+      {/* Background gradients removed for a clean dark hero */}
 
       <div className="container w-full pt-6 pr-4 md:pt-4 md:pr-0 lg:pt-8">
         <div className="grid items-center gap-6 md:gap-8 lg:gap-12 md:grid-cols-12">
@@ -77,7 +65,7 @@ export const Hero = () => {
             >
               <SplitText
                 text="Y. Dinesh Krishna"
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary whitespace-nowrap"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary whitespace-nowrap leading-[1.1] font-['Poppins',_system-ui,_sans-serif]"
                 splitType="chars"
                 delay={80}
                 duration={1.2}

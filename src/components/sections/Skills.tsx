@@ -56,7 +56,7 @@ export const Skills = () => {
           {skillsData.map((category, index) => (
             <div
               key={category.categoryName}
-              className="glass rounded-xl p-6 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+              className="rounded-xl p-6 border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
             >
               <SplitText
                 text={category.categoryName}

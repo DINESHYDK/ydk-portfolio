@@ -324,8 +324,8 @@ export const ContactChatbot = () => {
                     </div>
                   </div>
 
-                  {/* Messages Area */}
-                  <div className="max-h-[500px] overflow-y-auto p-6 space-y-4 bg-background/60">
+                  {/* Messages Area (fixed height, scrolls instead of growing) */}
+                  <div className="h-[420px] md:h-[500px] overflow-y-auto p-6 space-y-4 bg-background/60">
                     <AnimatePresence mode="popLayout">
                       {messages.map((message, index) => (
                         <motion.div

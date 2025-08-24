@@ -210,9 +210,8 @@ export const ProjectCard = ({
                     {project.demoUrl && (
                       <Button
                         size="sm"
-                        variant="outline"
                         onClick={() => onDemoClick(project)}
-                        className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+                        className="bg-accent text-accent-foreground hover:bg-accent/90"
                       >
                         <Play className="w-4 h-4 mr-2" />
                         Demo

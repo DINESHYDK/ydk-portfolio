@@ -314,40 +314,39 @@ export const ProjectModal = ({
                 </motion.div>
               </div>
             </div>
-
-            {/* Navigation Arrows */}
-            {(canNavigatePrev || canNavigateNext) && (
-              <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between pointer-events-none">
-                {canNavigatePrev && (
-                  <motion.button
-                    className="pointer-events-auto w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors ml-4"
-                    onClick={() => onNavigate("prev")}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </motion.button>
-                )}
-
-                {canNavigateNext && (
-                  <motion.button
-                    className="pointer-events-auto w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors mr-4"
-                    onClick={() => onNavigate("next")}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </motion.button>
-                )}
-              </div>
-            )}
           </motion.div>
+          {/* Navigation Arrows - outside the modal container */}
+          {(canNavigatePrev || canNavigateNext) && (
+            <div className="pointer-events-none absolute inset-0">
+              {canNavigatePrev && (
+                <motion.button
+                  className="pointer-events-auto fixed left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors"
+                  onClick={() => onNavigate("prev")}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </motion.button>
+              )}
+
+              {canNavigateNext && (
+                <motion.button
+                  className="pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors"
+                  onClick={() => onNavigate("next")}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </motion.button>
+              )}
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

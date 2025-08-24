@@ -169,11 +169,13 @@ export const ProjectsRedesign = () => {
             from={{ opacity: 0, y: 50, rotationX: -90 }}
             to={{ opacity: 1, y: 0, rotationX: 0 }}
           />
-          <p className="text-muted-foreground">Selected work and experiments</p>
+          <p className="text-muted-foreground mt-3 md:mt-4">
+            Selected work and experiments
+          </p>
         </header>
 
         {/* Filters */}
-        <div className="flex items-center justify-center gap-2 mb-8">
+        <div className="flex items-center justify-center gap-3 md:gap-4 mb-10 md:mb-12">
           {FILTERS.map((f) => (
             <button
               key={f}

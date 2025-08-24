@@ -30,6 +30,26 @@ const AppRouter = () => {
 
   // Handle global keyboard shortcuts
   useEffect(() => {
+    // Prevent browser scroll restoration on reload/back
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration =
+        "manual" as typeof window.history.scrollRestoration;
+    }
+
+    // On first mount, always start at top and strip any hash
+    requestAnimationFrame(() => {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        if (window.location.hash) {
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname + window.location.search
+          );
+        }
+      } catch {}
+    });
+
     const handleKeyDown = (event: KeyboardEvent) => {
       // Toggle command palette with Cmd/Ctrl + K
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {

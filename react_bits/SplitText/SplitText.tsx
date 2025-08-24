@@ -127,7 +127,11 @@ const SplitText: React.FC<SplitTextProps> = ({
     });
 
     // Clear color property after animation to let CSS take over
-    tl.set(targets, { clearProps: "color" }, duration + (delay / 1000) * targets.length);
+    tl.set(
+      targets,
+      { clearProps: "color" },
+      duration + (delay / 1000) * targets.length
+    );
 
     return () => {
       tl.kill();
@@ -156,10 +160,11 @@ const SplitText: React.FC<SplitTextProps> = ({
   return (
     <p
       ref={ref}
-      className={`split-parent overflow-hidden inline-block whitespace-normal ${className}`}
+      className={`split-parent overflow-visible inline-block whitespace-normal ${className}`}
       style={{
         textAlign,
         wordWrap: "break-word",
+        lineHeight: 1.1,
       }}
     >
       {text}
