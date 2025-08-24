@@ -8,8 +8,8 @@ export const AboutMe = () => {
         <div className="space-y-6 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           {/* Intro */}
           <p>
-            <strong>Hi, I’m Y. Dinesh Krishna</strong> — a first‑year Computer
-            Science Engineering student at IIT (ISM) Dhanbad (Class of 2028).
+            <strong>Hi, I’m Y. Dinesh Krishna</strong> — a Sophomore in Computer
+            Science Engineering student at IIT (ISM) Dhanbad (2024 - 2028).
             I’m driven by curiosity, discipline, and the satisfaction of turning
             ideas into simple, reliable software.
           </p>

@@ -24,7 +24,7 @@ const ContactChatbot = React.lazy(
 interface ContentState {
   isLoading: boolean;
   error: string | null;
-  data: any;
+  data: Record<string, unknown>;
 }
 
 const ContentRenderer = React.memo(

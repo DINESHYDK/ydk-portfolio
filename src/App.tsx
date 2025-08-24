@@ -47,7 +47,10 @@ const AppRouter = () => {
             window.location.pathname + window.location.search
           );
         }
-      } catch {}
+      } catch (error) {
+        // Silently handle scroll errors in case of browser restrictions
+        console.debug("Scroll reset failed:", error);
+      }
     });
 
     const handleKeyDown = (event: KeyboardEvent) => {

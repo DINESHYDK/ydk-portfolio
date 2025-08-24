@@ -120,7 +120,10 @@ const CommandPaletteContainer = React.forwardRef<
 
     // Debounced search handler for performance
     const debouncedSearchChange = useCallback(
-      debounce(handleSearchChange, 150),
+      (value: string) => {
+        const debouncedFn = debounce(handleSearchChange, 150);
+        debouncedFn(value);
+      },
       [handleSearchChange]
     );
 

@@ -17,53 +17,62 @@ const SuggestionsSectionDemo: React.FC = () => {
     console.log("Navigate to:", route);
   });
 
-  const handleItemSelect = (item: (typeof suggestions)[0]) => {
-    console.log("Selected item:", item);
-    item.action();
-  };
+  const handleItemSelect = React.useCallback(
+    (item: (typeof suggestions)[0]) => {
+      console.log("Selected item:", item);
+      item.action();
+    },
+    []
+  );
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    const filteredSuggestions = suggestions.filter(
-      (item) =>
-        !searchValue.trim() ||
-        item.label.toLowerCase().includes(searchValue.toLowerCase()) ||
-        (item.shortcut &&
-          item.shortcut.toLowerCase().includes(searchValue.toLowerCase()))
-    );
+  const handleKeyDown = React.useCallback(
+    (event: KeyboardEvent) => {
+      const filteredSuggestions = suggestions.filter(
+        (item) =>
+          !searchValue.trim() ||
+          item.label.toLowerCase().includes(searchValue.toLowerCase()) ||
+          (item.shortcut &&
+            item.shortcut.toLowerCase().includes(searchValue.toLowerCase()))
+      );
 
-    switch (event.key) {
-      case "ArrowDown":
-        event.preventDefault();
-        setSelectedIndex((prev) =>
-          prev < filteredSuggestions.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        setSelectedIndex((prev) =>
-          prev > 0 ? prev - 1 : filteredSuggestions.length - 1
-        );
-        break;
-      case "Enter":
-        event.preventDefault();
-        if (selectedIndex >= 0 && selectedIndex < filteredSuggestions.length) {
-          handleItemSelect(filteredSuggestions[selectedIndex]);
-        }
-        break;
-      case "Escape":
-        event.preventDefault();
-        setSearchValue("");
-        setSelectedIndex(-1);
-        break;
-    }
-  };
+      switch (event.key) {
+        case "ArrowDown":
+          event.preventDefault();
+          setSelectedIndex((prev) =>
+            prev < filteredSuggestions.length - 1 ? prev + 1 : 0
+          );
+          break;
+        case "ArrowUp":
+          event.preventDefault();
+          setSelectedIndex((prev) =>
+            prev > 0 ? prev - 1 : filteredSuggestions.length - 1
+          );
+          break;
+        case "Enter":
+          event.preventDefault();
+          if (
+            selectedIndex >= 0 &&
+            selectedIndex < filteredSuggestions.length
+          ) {
+            handleItemSelect(filteredSuggestions[selectedIndex]);
+          }
+          break;
+        case "Escape":
+          event.preventDefault();
+          setSearchValue("");
+          setSelectedIndex(-1);
+          break;
+      }
+    },
+    [searchValue, selectedIndex, suggestions, handleItemSelect]
+  );
 
   React.useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [searchValue, selectedIndex]);
+  }, [handleKeyDown, searchValue, selectedIndex]);
 
   return (
     <div className="min-h-screen bg-cp-background p-8">

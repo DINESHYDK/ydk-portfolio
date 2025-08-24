@@ -11,17 +11,26 @@ import { ContentRendererProps } from "@/types/command-palette";
 
 // Mock the utils
 vi.mock("@/lib/utils", () => ({
-  cn: (...classes: any[]) => classes.filter(Boolean).join(" "),
+  cn: (...classes: (string | undefined | null | false)[]) =>
+    classes.filter(Boolean).join(" "),
 }));
 
 // Mock lucide-react icons
 vi.mock("lucide-react", () => ({
-  ArrowLeft: ({ className, ...props }: any) => (
-    <div data-testid="arrow-left-icon" className={className} {...props} />
-  ),
-  Loader2: ({ className, ...props }: any) => (
-    <div data-testid="loader-icon" className={className} {...props} />
-  ),
+  ArrowLeft: ({
+    className,
+    ...props
+  }: {
+    className?: string;
+    [key: string]: unknown;
+  }) => <div data-testid="arrow-left-icon" className={className} {...props} />,
+  Loader2: ({
+    className,
+    ...props
+  }: {
+    className?: string;
+    [key: string]: unknown;
+  }) => <div data-testid="loader-icon" className={className} {...props} />,
 }));
 
 // Mock constants

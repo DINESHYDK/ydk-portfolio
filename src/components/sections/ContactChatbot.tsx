@@ -130,8 +130,8 @@ export const ContactChatbot = () => {
       },
     ]);
 
-    const newValues = { ...values } as any;
-    newValues[current] = text;
+    const newValues = { ...values };
+    (newValues as Record<string, string>)[current] = text;
     setValues(newValues);
     setInput("");
 

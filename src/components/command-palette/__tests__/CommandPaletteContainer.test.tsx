@@ -29,7 +29,13 @@ vi.mock("@/lib/command-palette-utils", () => ({
 
 // Mock child components
 vi.mock("../GlowingBorder", () => ({
-  default: function MockGlowingBorder({ children, ...props }: any) {
+  default: function MockGlowingBorder({
+    children,
+    ...props
+  }: {
+    children: React.ReactNode;
+    [key: string]: unknown;
+  }) {
     return (
       <div data-testid="glowing-border" {...props}>
         {children}
@@ -44,7 +50,12 @@ vi.mock("../SearchInput", () => ({
     onChange,
     placeholder,
     className,
-  }: any) {
+  }: {
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+    className?: string;
+  }) {
     return (
       <input
         data-testid="search-input"
@@ -64,23 +75,38 @@ vi.mock("../SuggestionsSection", () => ({
     selectedIndex,
     searchFilter,
     className,
-  }: any) {
+  }: {
+    suggestions: Array<{ id: string; label: string; action: () => void }>;
+    onItemSelect: (suggestion: {
+      id: string;
+      label: string;
+      action: () => void;
+    }) => void;
+    selectedIndex?: number;
+    searchFilter?: string;
+    className?: string;
+  }) {
     return (
       <div data-testid="suggestions-section" className={className}>
-        {suggestions.map((suggestion: any, index: number) => (
-          <button
-            key={suggestion.id}
-            data-testid={`suggestion-${suggestion.id}`}
-            onClick={() => {
-              // Call the suggestion's action directly to simulate the real behavior
-              suggestion.action();
-              onItemSelect(suggestion);
-            }}
-            className={selectedIndex === index ? "selected" : ""}
-          >
-            {suggestion.label}
-          </button>
-        ))}
+        {suggestions.map(
+          (
+            suggestion: { id: string; label: string; action: () => void },
+            index: number
+          ) => (
+            <button
+              key={suggestion.id}
+              data-testid={`suggestion-${suggestion.id}`}
+              onClick={() => {
+                // Call the suggestion's action directly to simulate the real behavior
+                suggestion.action();
+                onItemSelect(suggestion);
+              }}
+              className={selectedIndex === index ? "selected" : ""}
+            >
+              {suggestion.label}
+            </button>
+          )
+        )}
       </div>
     );
   },

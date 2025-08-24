@@ -3,7 +3,7 @@
  * Core interfaces for navigation items, app state, and user preferences
  */
 
-import { ReactComponentElement } from 'react';
+import { ReactComponentElement } from "react";
 
 // Navigation Item Types
 export interface NavigationItem {
@@ -85,7 +85,7 @@ export interface GlowingBorderProps {
 
 export interface ContentRendererProps {
   activeSection: string;
-  data?: any;
+  data?: Record<string, unknown>;
   onBack?: () => void;
   className?: string;
 }

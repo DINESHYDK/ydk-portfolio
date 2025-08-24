@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Project, ProjectFilter } from "@/types/project-showcase";
 import { SAMPLE_PROJECTS, getProjectCounts } from "@/data/projects";
@@ -43,24 +43,27 @@ export const ProjectShowcase = () => {
   };
 
   // Handle navigation between projects in modal
-  const handleNavigate = (direction: "prev" | "next") => {
-    if (!selectedProject) return;
+  const handleNavigate = useCallback(
+    (direction: "prev" | "next") => {
+      if (!selectedProject) return;
 
-    const currentIndex = filteredProjects.findIndex(
-      (p) => p.id === selectedProject.id
-    );
-    let newIndex: number;
+      const currentIndex = filteredProjects.findIndex(
+        (p) => p.id === selectedProject.id
+      );
+      let newIndex: number;
 
-    if (direction === "prev") {
-      newIndex =
-        currentIndex > 0 ? currentIndex - 1 : filteredProjects.length - 1;
-    } else {
-      newIndex =
-        currentIndex < filteredProjects.length - 1 ? currentIndex + 1 : 0;
-    }
+      if (direction === "prev") {
+        newIndex =
+          currentIndex > 0 ? currentIndex - 1 : filteredProjects.length - 1;
+      } else {
+        newIndex =
+          currentIndex < filteredProjects.length - 1 ? currentIndex + 1 : 0;
+      }
 
-    setSelectedProject(filteredProjects[newIndex]);
-  };
+      setSelectedProject(filteredProjects[newIndex]);
+    },
+    [selectedProject, filteredProjects]
+  );
 
   // Check if mobile
   useEffect(() => {
@@ -90,7 +93,7 @@ export const ProjectShowcase = () => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen, selectedProject]);
+  }, [handleNavigate, isModalOpen, selectedProject]);
 
   return (
     <section id="projects" className="py-20">

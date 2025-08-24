@@ -55,7 +55,9 @@ const WindowScrollStack: React.FC<WindowScrollStackProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLElement[]>([]);
-  const lastTransformsRef = useRef(new Map<number, any>());
+  const lastTransformsRef = useRef(
+    new Map<number, { scale: number; y: number; opacity: number }>()
+  );
   const isUpdatingRef = useRef(false);
   const animationFrameRef = useRef<number>();
 
@@ -215,6 +217,7 @@ const WindowScrollStack: React.FC<WindowScrollStackProps> = ({
   useLayoutEffect(() => {
     const container = containerRef.current;
     const scrollContainer = scrollContainerRef.current;
+    const currentTransforms = lastTransformsRef.current;
     if (!container || !scrollContainer) return;
 
     console.log("ScrollStack: useLayoutEffect triggered");
@@ -276,7 +279,7 @@ const WindowScrollStack: React.FC<WindowScrollStackProps> = ({
         scrollContainer.removeEventListener("resize", handleScroll);
       }
       cardsRef.current = [];
-      lastTransformsRef.current.clear();
+      currentTransforms.clear();
       isUpdatingRef.current = false;
     };
   }, [

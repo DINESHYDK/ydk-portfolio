@@ -3,8 +3,15 @@
  * Helper functions for command palette functionality
  */
 
-import { NavigationItem, SuggestionItem, UserPreferences } from '@/types/command-palette';
-import { KEYBOARD_SHORTCUTS, GLOW_INTENSITIES } from './command-palette-constants';
+import {
+  NavigationItem,
+  SuggestionItem,
+  UserPreferences,
+} from "@/types/command-palette";
+import {
+  KEYBOARD_SHORTCUTS,
+  GLOW_INTENSITIES,
+} from "./command-palette-constants";
 
 /**
  * Filter navigation items based on search query
@@ -14,13 +21,14 @@ export function filterNavigationItems(
   query: string
 ): NavigationItem[] {
   if (!query.trim()) return items;
-  
+
   const searchTerm = query.toLowerCase().trim();
-  
-  return items.filter(item => 
-    item.label.toLowerCase().includes(searchTerm) ||
-    item.description?.toLowerCase().includes(searchTerm) ||
-    item.shortcut?.toLowerCase().includes(searchTerm)
+
+  return items.filter(
+    (item) =>
+      item.label.toLowerCase().includes(searchTerm) ||
+      item.description?.toLowerCase().includes(searchTerm) ||
+      item.shortcut?.toLowerCase().includes(searchTerm)
   );
 }
 
@@ -29,35 +37,35 @@ export function filterNavigationItems(
  */
 export function getShortcutDisplay(shortcut: string): string {
   return shortcut
-    .split('+')
-    .map(key => {
+    .split("+")
+    .map((key) => {
       switch (key.toLowerCase()) {
-        case 'cmd':
-        case 'meta':
-          return '⌘';
-        case 'ctrl':
-          return 'Ctrl';
-        case 'alt':
-          return 'Alt';
-        case 'shift':
-          return 'Shift';
-        case 'enter':
-          return '↵';
-        case 'escape':
-          return 'Esc';
-        case 'arrowup':
-          return '↑';
-        case 'arrowdown':
-          return '↓';
-        case 'arrowleft':
-          return '←';
-        case 'arrowright':
-          return '→';
+        case "cmd":
+        case "meta":
+          return "⌘";
+        case "ctrl":
+          return "Ctrl";
+        case "alt":
+          return "Alt";
+        case "shift":
+          return "Shift";
+        case "enter":
+          return "↵";
+        case "escape":
+          return "Esc";
+        case "arrowup":
+          return "↑";
+        case "arrowdown":
+          return "↓";
+        case "arrowleft":
+          return "←";
+        case "arrowright":
+          return "→";
         default:
           return key.toUpperCase();
       }
     })
-    .join(' + ');
+    .join(" + ");
 }
 
 /**
@@ -67,18 +75,18 @@ export function matchesShortcut(
   event: KeyboardEvent,
   shortcut: string
 ): boolean {
-  const keys = shortcut.toLowerCase().split('+');
+  const keys = shortcut.toLowerCase().split("+");
   const eventKey = event.key.toLowerCase();
-  
-  const hasCmd = keys.includes('cmd') || keys.includes('meta');
-  const hasCtrl = keys.includes('ctrl');
-  const hasAlt = keys.includes('alt');
-  const hasShift = keys.includes('shift');
-  
-  const mainKey = keys.find(key => 
-    !['cmd', 'meta', 'ctrl', 'alt', 'shift'].includes(key)
+
+  const hasCmd = keys.includes("cmd") || keys.includes("meta");
+  const hasCtrl = keys.includes("ctrl");
+  const hasAlt = keys.includes("alt");
+  const hasShift = keys.includes("shift");
+
+  const mainKey = keys.find(
+    (key) => !["cmd", "meta", "ctrl", "alt", "shift"].includes(key)
   );
-  
+
   return (
     (!hasCmd || event.metaKey) &&
     (!hasCtrl || event.ctrlKey) &&
@@ -93,7 +101,7 @@ export function matchesShortcut(
  */
 export function getGlowStyles(intensity: keyof typeof GLOW_INTENSITIES) {
   const config = GLOW_INTENSITIES[intensity];
-  
+
   return {
     filter: `blur(${config.blur})`,
     boxShadow: `0 0 ${config.blur} ${config.spread} hsl(var(--cp-glow) / ${config.opacity})`,
@@ -103,12 +111,12 @@ export function getGlowStyles(intensity: keyof typeof GLOW_INTENSITIES) {
 /**
  * Debounce function for search input
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -122,10 +130,10 @@ export function getUserPreferencesWithDefaults(
   preferences?: Partial<UserPreferences>
 ): UserPreferences {
   return {
-    theme: 'dark',
+    theme: "dark",
     animationsEnabled: true,
     keyboardShortcutsEnabled: true,
-    defaultView: 'palette',
+    defaultView: "palette",
     ...preferences,
   };
 }
@@ -157,21 +165,21 @@ export function navigationItemToSuggestion(
  * Generate unique ID for navigation items
  */
 export function generateItemId(label: string, category: string): string {
-  return `${category}-${label.toLowerCase().replace(/\s+/g, '-')}`;
+  return `${category}-${label.toLowerCase().replace(/\s+/g, "-")}`;
 }
 
 /**
  * Check if device supports hover interactions
  */
 export function supportsHover(): boolean {
-  return window.matchMedia('(hover: hover)').matches;
+  return window.matchMedia("(hover: hover)").matches;
 }
 
 /**
  * Check if user prefers reduced motion
  */
 export function prefersReducedMotion(): boolean {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 /**
@@ -183,7 +191,7 @@ export function getResponsiveClasses(): {
   isDesktop: boolean;
 } {
   const width = window.innerWidth;
-  
+
   return {
     isMobile: width < 768,
     isTablet: width >= 768 && width < 1024,
