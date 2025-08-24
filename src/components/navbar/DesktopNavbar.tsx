@@ -78,11 +78,18 @@ export function DesktopNavbar({
               <a
                 key={id}
                 href={`#${id}`}
-                className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 ease-in-out hover:bg-muted/50 ${
+                className={`relative flex items-center gap-2 px-3 py-2 rounded-full transition-colors duration-200 ease-out hover:bg-muted/50 hover:underline focus-ring ${
                   activeId === id ? "bg-muted text-primary font-medium" : ""
                 }`}
               >
                 <Icon className="h-4 w-4" /> <span>{label}</span>
+                {activeId === id && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute left-3 right-3 -bottom-1 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
               </a>
             ))}
           </li>

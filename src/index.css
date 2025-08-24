@@ -35,6 +35,10 @@
 
     --radius: 0.5rem;
 
+    /* Unified card tokens */
+    --card-radius: 12px;
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+
     /* Sidebar colors */
     --sidebar-background: 220 13% 8%; /* #0d0d11 - Darker sidebar */
     --sidebar-foreground: 0 0% 100%;
@@ -133,6 +137,12 @@
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+  }
+
+  /* Base card surface (used across sections) */
+  .card-base {
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
   }
 
   /* Smooth scroll across the app */

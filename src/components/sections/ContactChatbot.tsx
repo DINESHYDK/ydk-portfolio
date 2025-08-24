@@ -301,7 +301,7 @@ export const ContactChatbot = () => {
                       onClick={() =>
                         toast.success("Thanks! I'll get back to you soon.")
                       }
-                      className="bg-primary text-primary-foreground"
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
                     >
                       Send
                     </Button>

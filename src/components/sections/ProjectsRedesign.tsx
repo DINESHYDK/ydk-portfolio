@@ -35,7 +35,7 @@ const ProjectTile = ({
   return (
     <article
       className={[
-        "group rounded-2xl border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm overflow-hidden flex flex-col h-full",
+        "group border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm overflow-hidden flex flex-col h-full card-base",
       ].join(" ")}
     >
       <button
@@ -93,7 +93,13 @@ const ProjectTile = ({
 };
 
 export const ProjectsRedesign = () => {
-  const [filter, setFilter] = useState<Filter>("All");
+  const [filter, setFilter] = useState<Filter>(() => {
+    const fromHash = decodeURIComponent(
+      window.location.hash.replace("#filter=", "")
+    ) as Filter;
+    const saved = (localStorage.getItem("projectFilter") as Filter) || "All";
+    return FILTERS.includes(fromHash) ? fromHash : saved;
+  });
   const [selected, setSelected] = useState<Project | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -171,7 +177,11 @@ export const ProjectsRedesign = () => {
           {FILTERS.map((f) => (
             <button
               key={f}
-              onClick={() => setFilter(f)}
+              onClick={() => {
+                setFilter(f);
+                localStorage.setItem("projectFilter", f);
+                window.location.hash = `#filter=${encodeURIComponent(f)}`;
+              }}
               className={[
                 "px-4 py-2 rounded-full border text-sm transition-colors",
                 filter === f

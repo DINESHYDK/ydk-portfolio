@@ -50,9 +50,9 @@ export const CodingStatsDashboard: React.FC<CodingStatsDashboardProps> = ({
       {/* Total Achievements - spans 2 cols on md+ */}
       <div className="md:col-span-2">
         <section className="rounded-2xl border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm p-5 md:p-6 h-full">
-          <header className="flex items-center gap-3 mb-4">
+          <header className="flex items-center gap-3 mb-2 md:mb-4">
             <Award className="h-6 w-6 text-primary" />
-            <h3 className="text-xl font-semibold text-white">
+            <h3 className="text-lg md:text-xl font-semibold text-white">
               Total Achievements
             </h3>
           </header>

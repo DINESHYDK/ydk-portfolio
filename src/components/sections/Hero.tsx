@@ -95,8 +95,8 @@ export const Hero = () => {
             >
               <TextTypeOptimized
                 text={introTexts}
-                typingSpeed={75}
-                pauseDuration={1500}
+                typingSpeed={55}
+                pauseDuration={2200}
                 showCursor={true}
                 cursorCharacter="|"
                 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium font-sans"
@@ -112,6 +112,9 @@ export const Hero = () => {
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="https://github.com/yourhandle"
                 aria-label="GitHub"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.6 }}
               >
                 <GitHubLogoIcon className="h-6 w-6" />
               </motion.a>
@@ -121,6 +124,9 @@ export const Hero = () => {
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="https://www.linkedin.com/in/yourhandle/"
                 aria-label="LinkedIn"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.7 }}
               >
                 <LinkedInLogoIcon className="h-6 w-6" />
               </motion.a>
@@ -130,6 +136,9 @@ export const Hero = () => {
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
                 href="#contact"
                 aria-label="Email"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.8 }}
               >
                 <EnvelopeClosedIcon className="h-6 w-6" />
               </motion.a>

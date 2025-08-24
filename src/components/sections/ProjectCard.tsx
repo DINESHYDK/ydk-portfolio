@@ -117,7 +117,7 @@ export const ProjectCard = ({
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.2 }}
       >
-        <Card className="glass h-full overflow-hidden relative group">
+        <Card className="glass h-full overflow-hidden relative group transition-shadow duration-200 ease-out">
           {/* Project Image */}
           <div
             className="relative aspect-video overflow-hidden cursor-pointer"
@@ -127,10 +127,13 @@ export const ProjectCard = ({
               className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center"
               initial={false}
               animate={{
-                scale: isHovered ? 1.05 : 1,
-                opacity: isHovered ? 0.8 : 1,
+                scale: isHovered ? 1.03 : 1,
+                opacity: isHovered ? 0.9 : 1,
+                boxShadow: isHovered
+                  ? "0 10px 30px rgba(0,0,0,0.25), 0 0 24px rgba(0,212,255,0.18)"
+                  : "0 0 0 rgba(0,0,0,0)",
               }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               {/* Placeholder for project image */}
               <div className="text-center p-4">
