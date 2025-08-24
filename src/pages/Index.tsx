@@ -5,7 +5,7 @@ import { Hero } from "@/components/sections/Hero";
 import { AboutMe } from "@/components/sections/AboutMe";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
-import { CodingStats } from "@/components/sections/CodingStats";
+import { CodingStatsSection } from "@/components/sections/CodingStatsSection";
 import { ContactChatbot } from "@/components/sections/ContactChatbot";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const Index = () => {
         <AboutMe />
         <Projects />
         <Skills />
-        <CodingStats />
+        <CodingStatsSection />
         <ContactChatbot />
       </main>
 
