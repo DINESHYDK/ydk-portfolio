@@ -73,7 +73,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "ai-chat-assistant",
     title: "AI Chat Assistant",
     description: "Intelligent conversational AI with context awareness",
-    longDescription: "A sophisticated AI chat assistant built with OpenAI's GPT-4 API, featuring context-aware conversations, memory persistence, and customizable personality settings. The application includes real-time streaming responses, conversation history, and advanced prompt engineering for optimal user experience.",
+    longDescription:
+      "A sophisticated AI chat assistant built with OpenAI's GPT-4 API, featuring context-aware conversations, memory persistence, and customizable personality settings. The application includes real-time streaming responses, conversation history, and advanced prompt engineering for optimal user experience.",
     image: "/images/projects/ai-chat-assistant.jpg",
     category: "ai",
     technologies: [
@@ -100,7 +101,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "task-management-app",
     title: "Task Management Pro",
     description: "Modern task management with team collaboration",
-    longDescription: "A comprehensive task management application featuring real-time collaboration, project organization, and advanced filtering. Built with modern React patterns and includes drag-and-drop functionality, deadline tracking, and team member assignment capabilities.",
+    longDescription:
+      "A comprehensive task management application featuring real-time collaboration, project organization, and advanced filtering. Built with modern React patterns and includes drag-and-drop functionality, deadline tracking, and team member assignment capabilities.",
     image: "/images/projects/task-management.jpg",
     category: "web",
     technologies: [
@@ -127,7 +129,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "ml-image-classifier",
     title: "ML Image Classifier",
     description: "Deep learning image classification with custom models",
-    longDescription: "An advanced machine learning application for image classification using custom-trained models. Features include real-time image processing, batch classification, model comparison, and detailed confidence scoring with visualization of prediction results.",
+    longDescription:
+      "An advanced machine learning application for image classification using custom-trained models. Features include real-time image processing, batch classification, model comparison, and detailed confidence scoring with visualization of prediction results.",
     image: "/images/projects/ml-classifier.jpg",
     category: "ai",
     technologies: [
@@ -154,7 +157,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "portfolio-website",
     title: "Interactive Portfolio",
     description: "Modern portfolio with advanced animations and interactions",
-    longDescription: "This very portfolio website you're viewing! Built with cutting-edge web technologies, featuring smooth animations, interactive components, and a modern design system. Includes dark mode, responsive design, and optimized performance.",
+    longDescription:
+      "This very portfolio website you're viewing! Built with cutting-edge web technologies, featuring smooth animations, interactive components, and a modern design system. Includes dark mode, responsive design, and optimized performance.",
     image: "/images/projects/portfolio.jpg",
     category: "web",
     technologies: [
@@ -181,7 +185,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "data-visualization-dashboard",
     title: "Data Visualization Dashboard",
     description: "Interactive charts and analytics platform",
-    longDescription: "A comprehensive data visualization platform with interactive charts, real-time data updates, and customizable dashboards. Features multiple chart types, data filtering, export capabilities, and responsive design for all devices.",
+    longDescription:
+      "A comprehensive data visualization platform with interactive charts, real-time data updates, and customizable dashboards. Features multiple chart types, data filtering, export capabilities, and responsive design for all devices.",
     image: "/images/projects/data-dashboard.jpg",
     category: "web",
     technologies: [
@@ -208,7 +213,8 @@ export const SAMPLE_PROJECTS: Project[] = [
     id: "ai-code-reviewer",
     title: "AI Code Reviewer",
     description: "Automated code review with AI-powered suggestions",
-    longDescription: "An intelligent code review tool that uses AI to analyze code quality, suggest improvements, and identify potential bugs. Features include support for multiple programming languages, integration with popular version control systems, and detailed reporting.",
+    longDescription:
+      "An intelligent code review tool that uses AI to analyze code quality, suggest improvements, and identify potential bugs. Features include support for multiple programming languages, integration with popular version control systems, and detailed reporting.",
     image: "/images/projects/ai-code-reviewer.jpg",
     category: "ai",
     technologies: [
@@ -233,25 +239,27 @@ export const SAMPLE_PROJECTS: Project[] = [
 ];
 
 // Utility functions for working with project data
-export const getProjectsByCategory = (category: "web" | "ai" | "all"): Project[] => {
+export const getProjectsByCategory = (
+  category: "web" | "ai" | "all"
+): Project[] => {
   if (category === "all") return SAMPLE_PROJECTS;
-  return SAMPLE_PROJECTS.filter(project => project.category === category);
+  return SAMPLE_PROJECTS.filter((project) => project.category === category);
 };
 
 export const getFeaturedProjects = (): Project[] => {
-  return SAMPLE_PROJECTS.filter(project => project.featured);
+  return SAMPLE_PROJECTS.filter((project) => project.featured);
 };
 
 export const getProjectById = (id: string): Project | undefined => {
-  return SAMPLE_PROJECTS.find(project => project.id === id);
+  return SAMPLE_PROJECTS.find((project) => project.id === id);
 };
 
 export const getProjectCounts = () => {
-  const webCount = SAMPLE_PROJECTS.filter(p => p.category === "web").length;
-  const aiCount = SAMPLE_PROJECTS.filter(p => p.category === "ai").length;
-  
+  const webCount = SAMPLE_PROJECTS.filter((p) => p.category === "web").length;
+  const aiCount = SAMPLE_PROJECTS.filter((p) => p.category === "ai").length;
+
   return {
-    "All": SAMPLE_PROJECTS.length,
+    All: SAMPLE_PROJECTS.length,
     "Web Apps": webCount,
     "AI Projects": aiCount,
   };

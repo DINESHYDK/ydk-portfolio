@@ -1,30 +1,23 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
+import { useNavigate } from "react-router-dom";
 
 import ProfileCard from "@/components/ui/ProfileCard";
-import GradientText from "@/components/ui/GradientText";
 import TextTypeOptimized from "@/components/ui/TextTypeOptimized";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import SplitText from "../../../react_bits/SplitText/SplitText";
 
 export const Hero = () => {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
+  const navigate = useNavigate();
 
   const introTexts = ["AI Engineer", "Coding Enthusiast", "Web Developer"];
 
   return (
     <section
       id="home"
-      ref={ref}
       className="relative min-h-[92vh] flex items-center bg-background"
     >
       {/* Background gradients removed for a clean dark hero */}
@@ -134,25 +127,27 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Buttons row beneath both columns */}
+        {/* Glassmorphism CTA Buttons */}
         <motion.div
           className="mt-6 md:mt-8 flex items-center justify-center gap-4"
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.15 }}
         >
-          <InteractiveHoverButton
-            className="w-auto px-8 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg"
+          <motion.button
+            className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-white/10 border border-white/20 backdrop-blur-sm rounded-lg text-white font-medium transition-all duration-300 hover:border-primary hover:text-primary hover:shadow-lg hover:shadow-primary/20 text-sm sm:text-base"
             onClick={() => {
-              // Navigate to resume or open resume
-              window.open("/resume", "_blank");
+              // Navigate to resume page
+              navigate("/resume");
             }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            View Resume
-          </InteractiveHoverButton>
+            <span>View Resume</span>
+          </motion.button>
 
-          <InteractiveHoverButton
-            className="w-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white font-semibold rounded-lg shadow-lg"
+          <motion.button
+            className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-white/10 border border-white/20 backdrop-blur-sm rounded-lg text-white font-medium transition-all duration-300 hover:border-primary hover:text-primary hover:shadow-lg hover:shadow-primary/20 text-sm sm:text-base"
             onClick={() => {
               // Scroll to contact section
               const contactSection = document.getElementById("contact");
@@ -160,9 +155,11 @@ export const Hero = () => {
                 contactSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            Contact Me
-          </InteractiveHoverButton>
+            <span>Contact Me</span>
+          </motion.button>
         </motion.div>
       </div>
     </section>

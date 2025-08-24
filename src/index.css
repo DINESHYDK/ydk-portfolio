@@ -501,3 +501,41 @@
   font-size: 1.5em !important;
   margin-right: 0.5rem !important;
 }
+
+/* Animated underline keyframes */
+@keyframes underline {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Scroll-triggered underline animation */
+.animate-underline {
+  animation: underline 1s ease-out forwards;
+}
+
+/* Mobile responsive underline fix */
+@media (max-width: 640px) {
+  .animated-underline {
+    display: block;
+    position: relative;
+    margin-top: 4px;
+  }
+
+  /* Reduce heading font size on mobile */
+  .resume-heading {
+    font-size: 1.25rem !important; /* text-xl instead of text-2xl */
+    line-height: 1.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller on very small screens */
+  .resume-heading {
+    font-size: 1.125rem !important; /* text-lg */
+    line-height: 1.75rem !important;
+  }
+}
