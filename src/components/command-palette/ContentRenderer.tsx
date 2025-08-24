@@ -14,8 +14,8 @@ import LoadingSkeleton from "./LoadingSkeleton";
 const Hero = React.lazy(() => import("@/components/sections/Hero"));
 const Projects = React.lazy(() => import("@/components/sections/Projects"));
 const Skills = React.lazy(() => import("@/components/sections/Skills"));
-const CodingStats = React.lazy(
-  () => import("@/components/sections/CodingStats")
+const CodingStatsSection = React.lazy(
+  () => import("@/components/sections/CodingStatsSection")
 );
 const ContactChatbot = React.lazy(
   () => import("@/components/sections/ContactChatbot")
@@ -127,7 +127,7 @@ const ContentRenderer = React.memo(
 
           case "stats":
           case "coding-stats":
-            return contentWrapper(<CodingStats />);
+            return contentWrapper(<CodingStatsSection />);
 
           case "contact":
             return contentWrapper(<ContactChatbot />);
