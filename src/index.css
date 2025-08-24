@@ -134,6 +134,16 @@
       "rlig" 1,
       "calt" 1;
   }
+
+  /* Smooth scroll across the app */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Offset for fixed navbar so anchors land with breathing room */
+  section {
+    scroll-margin-top: 96px; /* ~6rem */
+  }
 }
 
 /* Command Palette Styles */
