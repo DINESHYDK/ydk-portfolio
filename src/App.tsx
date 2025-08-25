@@ -128,7 +128,22 @@ const AppRouter = () => {
       {/* Floating Command Palette Toggle Button - Hidden on Mobile */}
       {!showCommandPalette && (
         <button
-          onClick={() => setShowCommandPalette(true)}
+          onClick={() => {
+            // Import haptic function inline to avoid circular dependencies
+            if (
+              "vibrate" in navigator &&
+              /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                navigator.userAgent
+              )
+            ) {
+              try {
+                navigator.vibrate(300);
+              } catch (error) {
+                console.debug("Haptic feedback failed:", error);
+              }
+            }
+            setShowCommandPalette(true);
+          }}
           className="fixed bottom-6 right-6 z-50 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 group hidden md:flex items-center justify-center"
           aria-label="Open command palette (⌘K)"
           title="Open command palette (⌘K)"

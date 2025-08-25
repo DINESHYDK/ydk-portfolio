@@ -6,6 +6,7 @@ import {
   BarChart3,
   MessageCircle,
 } from "lucide-react";
+import { hapticNavigation } from "@/lib/haptic";
 
 const LINKS = [
   { id: "home", label: "Home", icon: Home },
@@ -36,6 +37,7 @@ export function MobileNavbar({
                     : ""
                 }`}
                 aria-label={label}
+                onClick={() => hapticNavigation()}
               >
                 <Icon className="h-[0.85rem] w-[0.85rem]" />
               </a>

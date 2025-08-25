@@ -4,6 +4,7 @@ import SplitText from "../../../react_bits/SplitText/SplitText";
 import { Project } from "@/types/project-showcase";
 import { SAMPLE_PROJECTS } from "@/data/projects";
 import { ProjectModal } from "./ProjectModal";
+import { hapticButtonPress } from "@/lib/haptic";
 
 type Filter = "All" | "Web Apps" | "AI Projects";
 
@@ -40,7 +41,10 @@ const ProjectTile = ({
     >
       <button
         className="relative aspect-[16/9] w-full overflow-hidden"
-        onClick={() => onOpen(project)}
+        onClick={() => {
+          hapticButtonPress();
+          onOpen(project);
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
         <div className="absolute inset-0 flex items-center justify-center">
@@ -73,6 +77,7 @@ const ProjectTile = ({
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+            onClick={() => hapticButtonPress()}
           >
             <Github className="w-4 h-4" /> Code
           </a>
@@ -82,6 +87,7 @@ const ProjectTile = ({
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-sm text-secondary hover:underline"
+              onClick={() => hapticButtonPress()}
             >
               <ExternalLink className="w-4 h-4" /> Demo
             </a>
@@ -180,6 +186,7 @@ export const ProjectsRedesign = () => {
             <button
               key={f}
               onClick={() => {
+                hapticButtonPress();
                 setFilter(f);
                 localStorage.setItem("projectFilter", f);
                 window.location.hash = `#filter=${encodeURIComponent(f)}`;

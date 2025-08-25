@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileCard from "@/components/ui/ProfileCard";
 import TextTypeOptimized from "@/components/ui/TextTypeOptimized";
 import SplitText from "../../../react_bits/SplitText/SplitText";
+import { hapticButtonPress } from "@/lib/haptic";
 
 export const Hero = () => {
   const navigate = useNavigate();
@@ -96,6 +97,7 @@ export const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.6 }}
+                onClick={() => hapticButtonPress()}
               >
                 <GitHubLogoIcon className="h-6 w-6" />
               </motion.a>
@@ -108,6 +110,7 @@ export const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.7 }}
+                onClick={() => hapticButtonPress()}
               >
                 <LinkedInLogoIcon className="h-6 w-6" />
               </motion.a>
@@ -120,6 +123,7 @@ export const Hero = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.8 }}
+                onClick={() => hapticButtonPress()}
               >
                 <EnvelopeClosedIcon className="h-6 w-6" />
               </motion.a>
@@ -137,6 +141,7 @@ export const Hero = () => {
           <motion.button
             className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-white/10 border border-white/20 backdrop-blur-sm rounded-lg text-white font-medium transition-all duration-300 hover:border-primary hover:text-primary hover:shadow-lg hover:shadow-primary/20 text-sm sm:text-base"
             onClick={() => {
+              hapticButtonPress();
               // Navigate to resume page
               navigate("/resume");
             }}
@@ -149,6 +154,7 @@ export const Hero = () => {
           <motion.button
             className="group relative px-4 py-2 sm:px-6 sm:py-3 bg-white/10 border border-white/20 backdrop-blur-sm rounded-lg text-white font-medium transition-all duration-300 hover:border-primary hover:text-primary hover:shadow-lg hover:shadow-primary/20 text-sm sm:text-base"
             onClick={() => {
+              hapticButtonPress();
               // Scroll to contact section
               const contactSection = document.getElementById("contact");
               if (contactSection) {

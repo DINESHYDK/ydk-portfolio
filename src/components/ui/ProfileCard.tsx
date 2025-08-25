@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import "./ProfileCard.css";
+import { hapticButtonPress } from "@/lib/haptic";
 
 interface ProfileCardProps {
   avatarUrl: string;
@@ -314,6 +315,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   );
 
   const handleContactClick = useCallback(() => {
+    hapticButtonPress();
     onContactClick?.();
   }, [onContactClick]);
 

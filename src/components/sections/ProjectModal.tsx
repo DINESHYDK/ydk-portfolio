@@ -12,6 +12,7 @@ import {
   Play,
   Star,
 } from "lucide-react";
+import { hapticButtonPress } from "@/lib/haptic";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -177,7 +178,10 @@ export const ProjectModal = ({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={onClose}
+                onClick={() => {
+                  hapticButtonPress();
+                  onClose();
+                }}
                 className="w-8 h-8 p-0 hover:bg-muted"
               >
                 <X className="w-4 h-4" />
@@ -216,7 +220,10 @@ export const ProjectModal = ({
                   transition={{ delay: 0.2 }}
                 >
                   <Button
-                    onClick={() => window.open(project.githubUrl, "_blank")}
+                    onClick={() => {
+                      hapticButtonPress();
+                      window.open(project.githubUrl, "_blank");
+                    }}
                     className="w-full bg-primary hover:bg-primary/90"
                   >
                     <Github className="w-4 h-4 mr-2" />
@@ -226,7 +233,10 @@ export const ProjectModal = ({
                   {project.demoUrl ? (
                     <Button
                       variant="outline"
-                      onClick={() => window.open(project.demoUrl, "_blank")}
+                      onClick={() => {
+                        hapticButtonPress();
+                        window.open(project.demoUrl, "_blank");
+                      }}
                       className="w-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
                     >
                       <Play className="w-4 h-4 mr-2" />
@@ -321,7 +331,10 @@ export const ProjectModal = ({
               {canNavigatePrev && (
                 <motion.button
                   className="pointer-events-auto fixed left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors"
-                  onClick={() => onNavigate("prev")}
+                  onClick={() => {
+                    hapticButtonPress();
+                    onNavigate("prev");
+                  }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, x: -20 }}
@@ -335,7 +348,10 @@ export const ProjectModal = ({
               {canNavigateNext && (
                 <motion.button
                   className="pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-background/80 backdrop-blur-sm border rounded-full flex items-center justify-center shadow-lg hover:bg-background/90 transition-colors"
-                  onClick={() => onNavigate("next")}
+                  onClick={() => {
+                    hapticButtonPress();
+                    onNavigate("next");
+                  }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, x: 20 }}

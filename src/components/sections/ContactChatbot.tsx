@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, User, Sparkles, MessageCircle } from "lucide-react";
+import {
+  GitHubLogoIcon,
+  LinkedInLogoIcon,
+  EnvelopeClosedIcon,
+} from "@radix-ui/react-icons";
 import SplitText from "../../../react_bits/SplitText/SplitText";
+import { hapticButtonPress } from "@/lib/haptic";
 
 interface Message {
   id: string;
@@ -213,7 +219,10 @@ export const ContactChatbot = () => {
                   ? "bg-primary text-primary-foreground"
                   : "bg-transparent text-foreground"
               }`}
-              onClick={() => setMode("chat")}
+              onClick={() => {
+                hapticButtonPress();
+                setMode("chat");
+              }}
             >
               Chatbot
             </button>
@@ -223,7 +232,10 @@ export const ContactChatbot = () => {
                   ? "bg-primary text-primary-foreground"
                   : "bg-transparent text-foreground"
               }`}
-              onClick={() => setMode("form")}
+              onClick={() => {
+                hapticButtonPress();
+                setMode("form");
+              }}
             >
               Contact Form
             </button>
@@ -238,73 +250,223 @@ export const ContactChatbot = () => {
           <Card className="glass-dark border-primary/20 shadow-xl overflow-hidden">
             <CardContent className="p-0">
               {mode === "form" ? (
-                <div className="p-6 grid gap-4 md:grid-cols-2">
-                  <div className="md:col-span-2">
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Prefer a direct reach-out? Use the form or ping me on
-                      socials.
-                    </p>
-                    <div className="flex gap-3">
-                      <a
-                        href="https://github.com/yourhandle"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-3 py-2 rounded-md border hover:bg-white/5"
-                      >
-                        GitHub
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/in/yourhandle/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-3 py-2 rounded-md border hover:bg-white/5"
-                      >
-                        LinkedIn
-                      </a>
-                      <a
-                        href="mailto:you@example.com"
-                        className="px-3 py-2 rounded-md border hover:bg-white/5"
-                      >
-                        Email
-                      </a>
-                    </div>
+                <div className="relative overflow-hidden">
+                  {/* Animated Background Elements */}
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-10 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-pulse"></div>
+                    <div
+                      className="absolute bottom-10 right-10 w-24 h-24 bg-accent/20 rounded-full blur-xl animate-pulse"
+                      style={{ animationDelay: "1s" }}
+                    ></div>
+                    <div
+                      className="absolute top-1/2 left-1/2 w-16 h-16 bg-primary/10 rounded-full blur-lg animate-bounce"
+                      style={{ animationDelay: "2s" }}
+                    ></div>
                   </div>
-                  <div>
-                    <Input
-                      placeholder="Your name"
-                      value={values.name ?? ""}
-                      onChange={(e) =>
-                        setValues({ ...values, name: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      placeholder="your.email@example.com"
-                      value={values.email ?? ""}
-                      onChange={(e) =>
-                        setValues({ ...values, email: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <Input
-                      placeholder="Your message"
-                      value={values.message ?? ""}
-                      onChange={(e) =>
-                        setValues({ ...values, message: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="md:col-span-2 flex justify-end">
-                    <Button
-                      onClick={() =>
-                        toast.success("Thanks! I'll get back to you soon.")
-                      }
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+
+                  <div className="relative p-8 space-y-8">
+                    {/* Header Section */}
+                    <motion.div
+                      className="text-center space-y-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6 }}
                     >
-                      Send
-                    </Button>
+                      <div className="flex items-center justify-center space-x-3 mb-4">
+                        <motion.div
+                          className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg"
+                          whileHover={{ scale: 1.1, rotate: 360 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <MessageCircle className="w-6 h-6 text-white" />
+                        </motion.div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-primary">
+                            Want to work with me?
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            Let's talk about your next project
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Social Links */}
+                      <div className="flex justify-center gap-4">
+                        {[
+                          {
+                            name: "GitHub",
+                            href: "https://github.com/DINESHYDK",
+                            icon: GitHubLogoIcon,
+                          },
+                          {
+                            name: "LinkedIn",
+                            href: "https://www.linkedin.com/in/dineshydk/",
+                            icon: LinkedInLogoIcon,
+                          },
+                          {
+                            name: "Email",
+                            href: "mailto:dineshkrishnayeturi@gmail.com",
+                            icon: EnvelopeClosedIcon,
+                          },
+                        ].map((social, index) => (
+                          <motion.a
+                            key={social.name}
+                            href={social.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="group relative px-4 py-2 rounded-full border border-primary/30 hover:border-primary/60 transition-all duration-300 overflow-hidden"
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            onClick={() => hapticButtonPress()}
+                          >
+                            <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <span className="relative flex items-center gap-2 text-sm font-medium">
+                              <social.icon className="w-4 h-4" />
+                              {social.name}
+                            </span>
+                          </motion.a>
+                        ))}
+                      </div>
+                    </motion.div>
+
+                    {/* Form Section */}
+                    <motion.div
+                      className="space-y-6"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <div className="grid gap-6 md:grid-cols-2">
+                        {/* Name Field */}
+                        <motion.div
+                          className="space-y-2"
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <label className="text-sm font-medium text-primary flex items-center gap-2">
+                            <Sparkles className="w-4 h-4" />
+                            Your Name
+                          </label>
+                          <div className="relative group">
+                            <Input
+                              placeholder="What should I call you?"
+                              value={values.name ?? ""}
+                              onChange={(e) =>
+                                setValues({ ...values, name: e.target.value })
+                              }
+                              className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
+                            />
+                            <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                          </div>
+                        </motion.div>
+
+                        {/* Email Field */}
+                        <motion.div
+                          className="space-y-2"
+                          whileHover={{ scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <label className="text-sm font-medium text-primary flex items-center gap-2">
+                            <Send className="w-4 h-4" />
+                            Email Address
+                          </label>
+                          <div className="relative group">
+                            <Input
+                              placeholder="your.awesome@email.com"
+                              type="email"
+                              value={values.email ?? ""}
+                              onChange={(e) =>
+                                setValues({ ...values, email: e.target.value })
+                              }
+                              className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
+                            />
+                            <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                          </div>
+                        </motion.div>
+                      </div>
+
+                      {/* Message Field */}
+                      <motion.div
+                        className="space-y-2"
+                        whileHover={{ scale: 1.01 }}
+                        transition={{ type: "spring", stiffness: 300 }}
+                      >
+                        <label className="text-sm font-medium text-primary flex items-center gap-2">
+                          <MessageCircle className="w-4 h-4" />
+                          Your Message
+                        </label>
+                        <div className="relative group">
+                          <textarea
+                            placeholder="Tell me about your project, ideas, or just say hi! I'm excited to hear from you... 🚀"
+                            value={values.message ?? ""}
+                            onChange={(e) =>
+                              setValues({ ...values, message: e.target.value })
+                            }
+                            rows={6}
+                            className="w-full p-4 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20 resize-none focus:outline-none"
+                          />
+                          <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        </div>
+                      </motion.div>
+
+                      {/* Submit Button */}
+                      <motion.div
+                        className="flex justify-center pt-4"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                      >
+                        <motion.button
+                          onClick={() => {
+                            hapticButtonPress();
+                            if (
+                              !values.name ||
+                              !values.email ||
+                              !values.message
+                            ) {
+                              toast.error("Please fill in all fields! ✨");
+                              return;
+                            }
+                            if (
+                              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
+                            ) {
+                              toast.error(
+                                "Please enter a valid email address! 📧"
+                              );
+                              return;
+                            }
+                            toast.success(
+                              "🎉 Message sent! I'll get back to you soon!"
+                            );
+                          }}
+                          className="group relative px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                          whileHover={{ scale: 1.05, y: -2 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span className="relative flex items-center gap-3">
+                            <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                            Send Message
+                            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                          </span>
+                        </motion.button>
+                      </motion.div>
+
+                      {/* Footer Note */}
+                      <motion.div
+                        className="text-center pt-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                      >
+                        <p className="text-xs text-muted-foreground">
+                          🔒 Your information is secure and will only be used to
+                          contact you back
+                        </p>
+                      </motion.div>
+                    </motion.div>
                   </div>
                 </div>
               ) : (

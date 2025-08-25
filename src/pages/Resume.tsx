@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Download, Mail } from "lucide-react";
+import { hapticButtonPress } from "@/lib/haptic";
 
 const Resume = () => {
   const headingRefs = useRef<(HTMLHeadingElement | null)[]>([]);
@@ -57,7 +58,11 @@ const Resume = () => {
       {/* Back Navigation */}
       <div className="mb-8">
         <Button asChild variant="ghost" className="group">
-          <Link to="/" className="flex items-center gap-2">
+          <Link
+            to="/"
+            className="flex items-center gap-2"
+            onClick={() => hapticButtonPress()}
+          >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Home
           </Link>
@@ -71,13 +76,14 @@ const Resume = () => {
             href="/resume.pdf"
             download="DineshKrishna_Resume.pdf"
             aria-label="Download Resume"
+            onClick={() => hapticButtonPress()}
           >
             <Download className="w-4 h-4" />
             Download Resume
           </a>
         </Button>
         <Button asChild variant="outline" className="flex items-center gap-2">
-          <Link to="/contact">
+          <Link to="/contact" onClick={() => hapticButtonPress()}>
             <Mail className="w-4 h-4" />
             Hire Me
           </Link>
@@ -95,6 +101,7 @@ const Resume = () => {
           <a
             href="mailto:dineshkrishnayeturi@gmail.com"
             className="hover:text-primary"
+            onClick={() => hapticButtonPress()}
           >
             dineshkrishnayeturi@gmail.com
           </a>{" "}
@@ -104,6 +111,7 @@ const Resume = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary"
+            onClick={() => hapticButtonPress()}
           >
             GitHub
           </a>{" "}
@@ -113,6 +121,7 @@ const Resume = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary"
+            onClick={() => hapticButtonPress()}
           >
             LinkedIn
           </a>

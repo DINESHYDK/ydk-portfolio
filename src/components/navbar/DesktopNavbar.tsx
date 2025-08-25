@@ -46,31 +46,13 @@ export function DesktopNavbar({
             <motion.button
               aria-label="YDK Logo"
               onClick={handleEaster}
-              className="relative px-4 py-2 rounded-full hover:bg-muted/50 transition-all duration-300 ease-in-out"
-              whileHover={{ scale: 1.1 }}
+              className="relative px-4 py-2 transition-all duration-300 ease-in-out"
+              whileHover={{ scale: 1.35 }}
               whileTap={{ scale: 0.95 }}
             >
-              <motion.span
-                className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
-                whileHover={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={{
-                  backgroundSize: "200% 200%",
-                }}
-              >
+              <span className="text-xl font-bold text-white font-['Dancing_Script',_'Pacifico',_'Lobster',_cursive]">
                 YDK
-              </motion.span>
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-purple-500/20 opacity-0"
-                whileHover={{ opacity: 1, scale: 1.2 }}
-                transition={{ duration: 0.3 }}
-              />
+              </span>
             </motion.button>
           </li>
           <li className="flex items-center gap-1">
@@ -78,8 +60,8 @@ export function DesktopNavbar({
               <a
                 key={id}
                 href={`#${id}`}
-                className={`relative flex items-center gap-2 px-3 py-2 rounded-full transition-colors duration-200 ease-out hover:bg-muted/50 hover:underline focus-ring ${
-                  activeId === id ? "bg-muted text-primary font-medium" : ""
+                className={`relative flex items-center gap-2 px-3 py-2 transition-colors duration-200 ease-out hover:text-primary outline-none focus:outline-none ${
+                  activeId === id ? "text-primary font-medium" : ""
                 }`}
               >
                 <Icon className="h-4 w-4" /> <span>{label}</span>
