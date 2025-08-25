@@ -49,7 +49,7 @@ export const triggerHaptic = (
  * Convenience function for button press haptic feedback
  */
 export const hapticButtonPress = (): void => {
-  triggerHaptic("medium", 300);
+  triggerHaptic("medium", 200);
 };
 
 /**
