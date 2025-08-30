@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileCard from "@/components/ui/ProfileCard";
 import TextTypeOptimized from "@/components/ui/TextTypeOptimized";
 import SplitText from "../../../react_bits/SplitText/SplitText";
-import { hapticNavigation, hapticButtonPress } from "@/lib/haptic";
+import { hapticNavigation } from "@/lib/haptic";
 
 export const Hero = () => {
   const navigate = useNavigate();
