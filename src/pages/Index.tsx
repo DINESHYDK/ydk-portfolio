@@ -3,7 +3,7 @@ import { DesktopNavbar } from "@/components/navbar/DesktopNavbar";
 import { MobileNavbar } from "@/components/navbar/MobileNavbar";
 import { Hero } from "@/components/sections/Hero";
 import { AboutMe } from "@/components/sections/AboutMe";
-import { Projects } from "@/components/sections/Projects";
+import { ProjectsRedesign as Projects } from "@/components/sections/ProjectsRedesign";
 import { Skills } from "@/components/sections/Skills";
 import { CodingStatsSection } from "@/components/sections/CodingStatsSection";
 import { ContactChatbot } from "@/components/sections/ContactChatbot";

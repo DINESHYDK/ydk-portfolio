@@ -239,7 +239,6 @@ export const ProjectCard = ({
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => {
                 const iconClass = getTechnologyIcon(tech.name);
-                console.log(`Tech: ${tech.name}, Icon: ${iconClass}`); // Debug log
                 return (
                   <motion.span
                     key={tech.name}

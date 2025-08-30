@@ -12,7 +12,9 @@ import LoadingSkeleton from "./LoadingSkeleton";
 
 // Lazy load portfolio components
 const Hero = React.lazy(() => import("@/components/sections/Hero"));
-const Projects = React.lazy(() => import("@/components/sections/Projects"));
+const Projects = React.lazy(
+  () => import("@/components/sections/ProjectsRedesign")
+);
 const Skills = React.lazy(() => import("@/components/sections/Skills"));
 const CodingStatsSection = React.lazy(
   () => import("@/components/sections/CodingStatsSection")

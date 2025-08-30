@@ -289,9 +289,6 @@ export const ProjectModal = ({
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => {
                         const iconClass = getTechnologyIcon(tech.name);
-                        console.log(
-                          `Modal Tech: ${tech.name}, Icon: ${iconClass}`
-                        ); // Debug log
                         return (
                           <motion.div
                             key={tech.name}
