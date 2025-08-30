@@ -76,11 +76,97 @@ export const ProjectModal = ({
 }: ProjectModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const [imageError, setImageError] = useState(false);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+  const [hasShownHint, setHasShownHint] = useState(false);
+
+  // Swipe handling
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const minSwipeDistance = 50;
 
   // Reset image error when project changes
   useEffect(() => {
     setImageError(false);
   }, [project?.id]);
+
+  // Handle browser back button to close modal
+  useEffect(() => {
+    if (isOpen) {
+      const handlePopState = () => {
+        onClose();
+      };
+
+      // Add a history entry when modal opens
+      window.history.pushState({ modalOpen: true }, "");
+      window.addEventListener("popstate", handlePopState);
+
+      return () => {
+        window.removeEventListener("popstate", handlePopState);
+      };
+    }
+  }, [isOpen, onClose]);
+
+  // Show swipe hint on first modal open
+  // Check if device is mobile
+  const isMobile = () => {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth <= 768
+    );
+  };
+
+  // Show swipe hint on first modal open (mobile only)
+  useEffect(() => {
+    if (
+      isOpen &&
+      !hasShownHint &&
+      (canNavigatePrev || canNavigateNext) &&
+      isMobile()
+    ) {
+      const timer = setTimeout(() => {
+        setShowSwipeHint(true);
+        setHasShownHint(true);
+
+        // Hide hint after 2 seconds
+        setTimeout(() => {
+          setShowSwipeHint(false);
+        }, 2000);
+      }, 200);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, hasShownHint, canNavigatePrev, canNavigateNext]);
+
+  // Swipe gesture handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && canNavigateNext) {
+      hapticButtonPress();
+      onNavigate("next");
+    }
+    if (isRightSwipe && canNavigatePrev) {
+      hapticButtonPress();
+      onNavigate("prev");
+    }
+
+    // Reset values
+    touchStartX.current = 0;
+    touchEndX.current = 0;
+  };
 
   // Focus trap for accessibility
   useEffect(() => {
@@ -152,6 +238,9 @@ export const ProjectModal = ({
               stiffness: 300,
               damping: 30,
             }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b bg-muted/30">
@@ -333,9 +422,197 @@ export const ProjectModal = ({
                 </motion.div>
               </div>
             </div>
+
+            {/* Swipe Hint Overlay - Mobile Only */}
+            <AnimatePresence>
+              {showSwipeHint && (
+                <motion.div
+                  className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-none"
+                  initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                  animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
+                  exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for smooth scroll feel
+                  }}
+                >
+                  <motion.div
+                    className="relative bg-white dark:bg-gray-900 rounded-2xl px-8 py-6 mx-4 text-center border shadow-2xl overflow-hidden"
+                    initial={{
+                      scale: 0.8,
+                      y: 40,
+                      rotateX: -15,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      scale: 1,
+                      y: 0,
+                      rotateX: 0,
+                      opacity: 1,
+                    }}
+                    exit={{
+                      scale: 0.8,
+                      y: 40,
+                      rotateX: -15,
+                      opacity: 0,
+                    }}
+                    transition={{
+                      duration: 0.5,
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 25,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    }}
+                  >
+                    {/* Animated background gradient */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5"
+                      animate={{
+                        x: [-100, 100, -100],
+                        opacity: [0.3, 0.6, 0.3],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
+
+                    {/* Main content */}
+                    <div className="relative space-y-4">
+                      {/* Animated swipe gesture with smooth scroll physics */}
+                      <div className="flex items-center justify-center gap-6">
+                        <motion.div
+                          animate={{
+                            x: [-25, 25, -25],
+                            scale: [1, 1.15, 1],
+                            rotate: [-3, 3, -3],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: [0.25, 0.46, 0.45, 0.94], // Smooth scroll easing
+                            times: [0, 0.5, 1], // Control timing points
+                          }}
+                          className="text-3xl filter drop-shadow-lg"
+                        >
+                          👈
+                        </motion.div>
+
+                        <motion.div
+                          className="text-4xl"
+                          animate={{
+                            scale: [1, 1.08, 1],
+                            rotate: [0, 2, -2, 0],
+                            y: [0, -2, 0],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                            times: [0, 0.33, 0.66, 1],
+                          }}
+                        >
+                          📱
+                        </motion.div>
+
+                        <motion.div
+                          animate={{
+                            x: [25, -25, 25],
+                            scale: [1, 1.15, 1],
+                            rotate: [3, -3, 3],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                            times: [0, 0.5, 1],
+                          }}
+                          className="text-3xl filter drop-shadow-lg"
+                        >
+                          👉
+                        </motion.div>
+                      </div>
+
+                      {/* Text with staggered smooth entrance */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                          delay: 0.2,
+                          duration: 0.4,
+                          ease: [0.25, 0.46, 0.45, 0.94],
+                        }}
+                        className="space-y-2"
+                      >
+                        <motion.h3
+                          className="text-lg font-semibold text-gray-900 dark:text-white"
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            delay: 0.3,
+                            duration: 0.3,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                          }}
+                        >
+                          Swipe to Explore
+                        </motion.h3>
+                        <motion.p
+                          className="text-sm text-gray-600 dark:text-gray-300"
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{
+                            delay: 0.4,
+                            duration: 0.3,
+                            ease: [0.25, 0.46, 0.45, 0.94],
+                          }}
+                        >
+                          Navigate between projects with touch gestures
+                        </motion.p>
+                      </motion.div>
+
+                      {/* Smooth flowing dots */}
+                      <div className="flex justify-center gap-2 pt-2">
+                        {[0, 1, 2].map((i) => (
+                          <motion.div
+                            key={i}
+                            className="w-2 h-2 rounded-full bg-primary"
+                            animate={{
+                              scale: [1, 1.4, 1],
+                              opacity: [0.4, 1, 0.4],
+                              y: [0, -2, 0],
+                            }}
+                            transition={{
+                              duration: 1.8,
+                              repeat: Infinity,
+                              delay: i * 0.15,
+                              ease: [0.25, 0.46, 0.45, 0.94],
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Subtle scroll indicator */}
+                      <motion.div
+                        className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full"
+                        animate={{
+                          scaleX: [0.5, 1, 0.5],
+                          opacity: [0.3, 0.7, 0.3],
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: [0.25, 0.46, 0.45, 0.94],
+                        }}
+                      />
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
-          {/* Navigation Arrows - outside the modal container */}
-          {(canNavigatePrev || canNavigateNext) && (
+          {/* Navigation Arrows - Desktop Only */}
+          {(canNavigatePrev || canNavigateNext) && !isMobile() && (
             <div className="pointer-events-none absolute inset-0">
               {canNavigatePrev && (
                 <motion.button
