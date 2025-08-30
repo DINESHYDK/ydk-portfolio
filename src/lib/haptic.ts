@@ -49,42 +49,42 @@ export const triggerHaptic = (
  * Convenience function for button press haptic feedback
  */
 export const hapticButtonPress = (): void => {
-  triggerHaptic("medium", 200);
+  triggerHaptic("light", 100);
 };
 
 /**
  * Convenience function for navigation haptic feedback
  */
 export const hapticNavigation = (): void => {
-  triggerHaptic("light", 200);
+  triggerHaptic("light", 80);
 };
 
 /**
  * Convenience function for success action haptic feedback
  */
 export const hapticSuccess = (): void => {
-  triggerHaptic("heavy", 400);
+  triggerHaptic("light", 120);
 };
 
 /**
  * Convenience function for error/warning haptic feedback
  */
 export const hapticError = (): void => {
-  triggerHaptic("heavy", 100);
+  triggerHaptic("light", 60);
 };
 
 /**
  * Convenience function for subtle notification haptic feedback
  */
 export const hapticNotification = (): void => {
-  triggerHaptic("light", 150);
+  triggerHaptic("light", 80);
 };
 
 /**
  * Convenience function for strong confirmation haptic feedback
  */
 export const hapticConfirmation = (): void => {
-  triggerHaptic("heavy", 300);
+  triggerHaptic("light", 100);
 };
 
 /**
