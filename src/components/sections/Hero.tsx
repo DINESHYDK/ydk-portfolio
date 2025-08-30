@@ -92,7 +92,7 @@ export const Hero = () => {
                 whileHover={{ scale: 1.1, rotate: 2 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
-                href="https://github.com/yourhandle"
+                href="https://github.com/dineshydk"
                 aria-label="GitHub"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -105,7 +105,7 @@ export const Hero = () => {
                 whileHover={{ scale: 1.1, rotate: -2 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
-                href="https://www.linkedin.com/in/yourhandle/"
+                href="https://www.linkedin.com/in/dineshydk/"
                 aria-label="LinkedIn"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -118,7 +118,7 @@ export const Hero = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 rounded-full hover:bg-muted/60 transition-all duration-300 hover:shadow-lg"
-                href="#contact"
+                href="mailto:dineshkrishnayeturi@gmail.com"
                 aria-label="Email"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}

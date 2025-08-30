@@ -107,7 +107,7 @@ const Resume = () => {
           </a>{" "}
           •{" "}
           <a
-            href="https://github.com/DINESHYDK"
+            href="https://github.com/dineshydk"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary"

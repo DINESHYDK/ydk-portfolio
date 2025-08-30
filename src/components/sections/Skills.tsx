@@ -1,5 +1,6 @@
 import { skillsData, type Skill } from "@/lib/data/skillsData";
 import SplitText from "../../../react_bits/SplitText/SplitText";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const Skills = () => {
   const renderIcon = (skill: Skill) => {
@@ -108,28 +109,10 @@ export const Skills = () => {
   return (
     <section id="skills" className="py-20 skills-section">
       <div className="container mx-auto px-4">
-        <header className="mb-12 text-center">
-          <SplitText
-            text="Skills"
-            className="text-3xl md:text-4xl font-bold text-primary mb-3"
-            splitType="chars"
-            delay={50}
-            duration={0.8}
-            from={{
-              opacity: 0,
-              y: 50,
-              rotationX: -90,
-            }}
-            to={{
-              opacity: 1,
-              y: 0,
-              rotationX: 0,
-            }}
-          />
-          <p className="text-muted-foreground text-lg">
-            Technologies and tools I work with
-          </p>
-        </header>
+        <SectionHeading
+          text="Skills"
+          subtitle="Technologies and tools I work with"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {skillsData.map((category) => (

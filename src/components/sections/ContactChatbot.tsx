@@ -10,8 +10,8 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import SplitText from "../../../react_bits/SplitText/SplitText";
 import { hapticButtonPress } from "@/lib/haptic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 interface Message {
   id: string;
@@ -61,7 +61,6 @@ export const ContactChatbot = () => {
     message?: string;
   }>({});
   const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const [showTypingIndicator, setShowTypingIndicator] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
@@ -187,32 +186,21 @@ export const ContactChatbot = () => {
   return (
     <section id="contact" className="py-20 relative">
       <div className="container max-w-4xl relative">
-        <motion.header
+        <SectionHeading
+          text={mode === "chat" ? "Chat with DK" : "Contact Dinesh"}
+          subtitle={
+            mode === "chat"
+              ? "Quick guided chat to send your message."
+              : "Reach me directly via socials or the form."
+          }
+        />
+        <motion.div
           className="mb-6 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="flex items-center justify-center space-x-3 mb-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold">
-              DK
-            </div>
-            <SplitText
-              text={mode === "chat" ? "Chat with DK" : "Contact Dinesh"}
-              className="text-3xl md:text-4xl font-bold text-primary"
-              splitType="chars"
-              delay={60}
-              duration={0.6}
-              from={{ opacity: 0, y: 40, rotationX: -90 }}
-              to={{ opacity: 1, y: 0, rotationX: 0 }}
-            />
-          </div>
-          <p className="text-muted-foreground text-sm">
-            {mode === "chat"
-              ? "Quick guided chat to send your message."
-              : "Reach me directly via socials or the form."}
-          </p>
-          <div className="mt-4 inline-flex rounded-full border border-primary/30 overflow-hidden">
+          <div className="inline-flex rounded-full border border-primary/30 overflow-hidden">
             <button
               className={`px-4 py-2 text-sm ${
                 mode === "chat"
@@ -240,7 +228,7 @@ export const ContactChatbot = () => {
               Contact Form
             </button>
           </div>
-        </motion.header>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -274,7 +262,7 @@ export const ContactChatbot = () => {
                     >
                       <div className="flex items-center justify-center space-x-3 mb-4">
                         <motion.div
-                          className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg"
+                          className="hidden md:flex w-12 h-12 rounded-full bg-primary items-center justify-center shadow-lg"
                           whileHover={{ scale: 1.1, rotate: 360 }}
                           transition={{ duration: 0.6 }}
                         >
@@ -295,7 +283,7 @@ export const ContactChatbot = () => {
                         {[
                           {
                             name: "GitHub",
-                            href: "https://github.com/DINESHYDK",
+                            href: "https://github.com/dineshydk",
                             icon: GitHubLogoIcon,
                           },
                           {
@@ -324,7 +312,7 @@ export const ContactChatbot = () => {
                           >
                             <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <span className="relative flex items-center gap-2 text-sm font-medium">
-                              <social.icon className="w-4 h-4" />
+                              <social.icon className="w-4 h-4 hidden md:block" />
                               {social.name}
                             </span>
                           </motion.a>
@@ -449,7 +437,6 @@ export const ContactChatbot = () => {
                           <span className="relative flex items-center gap-3">
                             <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                             Send Message
-                            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
                           </span>
                         </motion.button>
                       </motion.div>
@@ -489,7 +476,7 @@ export const ContactChatbot = () => {
                   {/* Messages Area (fixed height, scrolls instead of growing) */}
                   <div className="h-[420px] md:h-[500px] overflow-y-auto p-6 space-y-4 bg-background/60">
                     <AnimatePresence mode="popLayout">
-                      {messages.map((message, index) => (
+                      {messages.map((message) => (
                         <motion.div
                           key={message.id}
                           layout
@@ -592,7 +579,7 @@ export const ContactChatbot = () => {
                             e.key === "Enter" && !e.shiftKey && onSubmit()
                           }
                           className="pr-12 bg-background/50 border-primary/20 focus:border-primary/40 rounded-full"
-                          disabled={isTyping}
+                          disabled={false}
                         />
                         {null}
                       </div>
@@ -608,7 +595,7 @@ export const ContactChatbot = () => {
                       >
                         <Button
                           onClick={onSubmit}
-                          disabled={!input.trim() || isTyping}
+                          disabled={!input.trim()}
                           className="rounded-full w-12 h-12 p-0 bg-gradient-to-r from-primary to-accent hover:from-primary/80 hover:to-accent/80 shadow-lg"
                         >
                           <Send className="w-4 h-4" />

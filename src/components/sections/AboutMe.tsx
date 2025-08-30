@@ -1,16 +1,16 @@
+import { SectionHeading } from "@/components/ui/SectionHeading";
+
 export const AboutMe = () => {
   return (
     <section id="about" className="py-20">
       <div className="container">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 text-center">
-          About Me
-        </h2>
+        <SectionHeading text="About Me" subtitle="Get to know me better" />
         <div className="space-y-6 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
           {/* Intro */}
           <p>
             <strong>Hi, I’m Y. Dinesh Krishna</strong> — a Sophomore in Computer
-            Science Engineering student at IIT (ISM) Dhanbad (2024 - 2028).
-            I’m driven by curiosity, discipline, and the satisfaction of turning
+            Science Engineering student at IIT (ISM) Dhanbad (2024 - 2028). I’m
+            driven by curiosity, discipline, and the satisfaction of turning
             ideas into simple, reliable software.
           </p>
 

@@ -5,6 +5,7 @@ import { Project } from "@/types/project-showcase";
 import { SAMPLE_PROJECTS } from "@/data/projects";
 import { ProjectModal } from "./ProjectModal";
 import { hapticButtonPress } from "@/lib/haptic";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 type Filter = "All" | "Web Apps" | "AI Projects";
 
@@ -165,20 +166,10 @@ export const ProjectsRedesign = () => {
   return (
     <section id="projects" className="py-20">
       <div className="container">
-        <header className="mb-8 text-center">
-          <SplitText
-            text="Projects"
-            className="text-3xl md:text-4xl font-bold text-primary mb-3"
-            splitType="chars"
-            delay={60}
-            duration={0.8}
-            from={{ opacity: 0, y: 50, rotationX: -90 }}
-            to={{ opacity: 1, y: 0, rotationX: 0 }}
-          />
-          <p className="text-muted-foreground mt-3 md:mt-4">
-            Selected work and experiments
-          </p>
-        </header>
+        <SectionHeading
+          text="Projects"
+          subtitle="Selected work and experiments"
+        />
 
         {/* Filters */}
         <div className="flex items-center justify-center gap-3 md:gap-4 mb-10 md:mb-12">
