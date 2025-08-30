@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { hapticNavigation, hapticButtonPress } from "@/lib/haptic";
 
 const LINKS = [
   { id: "home", label: "Home", icon: Home },
@@ -29,6 +30,7 @@ export function DesktopNavbar({
   const [clicks, setClicks] = useState(0);
 
   const handleEaster = () => {
+    hapticButtonPress(); // Add haptic feedback for logo clicks
     const next = clicks + 1;
     setClicks(next);
     if (next === 7) {
@@ -63,6 +65,7 @@ export function DesktopNavbar({
                 className={`relative flex items-center gap-2 px-3 py-2 transition-colors duration-200 ease-out hover:text-primary outline-none focus:outline-none ${
                   activeId === id ? "text-primary font-medium" : ""
                 }`}
+                onClick={() => hapticNavigation()}
               >
                 <Icon className="h-4 w-4" /> <span>{label}</span>
                 {activeId === id && (

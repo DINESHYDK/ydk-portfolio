@@ -67,6 +67,27 @@ export const hapticSuccess = (): void => {
 };
 
 /**
+ * Convenience function for error/warning haptic feedback
+ */
+export const hapticError = (): void => {
+  triggerHaptic("heavy", 100);
+};
+
+/**
+ * Convenience function for subtle notification haptic feedback
+ */
+export const hapticNotification = (): void => {
+  triggerHaptic("light", 150);
+};
+
+/**
+ * Convenience function for strong confirmation haptic feedback
+ */
+export const hapticConfirmation = (): void => {
+  triggerHaptic("heavy", 300);
+};
+
+/**
  * Hook for haptic feedback in React components
  */
 export const useHaptic = () => {
@@ -75,5 +96,8 @@ export const useHaptic = () => {
     buttonPress: hapticButtonPress,
     navigation: hapticNavigation,
     success: hapticSuccess,
+    error: hapticError,
+    notification: hapticNotification,
+    confirmation: hapticConfirmation,
   };
 };

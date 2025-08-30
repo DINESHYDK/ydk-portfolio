@@ -10,7 +10,7 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import { hapticButtonPress } from "@/lib/haptic";
+import { hapticButtonPress, hapticSuccess } from "@/lib/haptic";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 interface Message {
@@ -409,7 +409,7 @@ export const ContactChatbot = () => {
                       >
                         <motion.button
                           onClick={() => {
-                            hapticButtonPress();
+                            hapticSuccess(); // More satisfying heavy vibration
                             if (
                               !values.name ||
                               !values.email ||
