@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import { Heart } from "lucide-react";
+import { Heart, Code } from "lucide-react";
 import { hapticNavigation } from "@/lib/haptic";
 
 const Footer = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -226,9 +229,19 @@ const Footer = () => {
         {/* Copyright */}
         <motion.div variants={itemVariants} className="space-y-3">
           <p className="text-gray-300 flex items-center justify-center gap-2 text-sm opacity-80">
-            Made with{" "}
-            <Heart className="w-4 h-4 text-red-400" fill="currentColor" /> by Y.
-            Dinesh Krishna
+            Made with{" "} Passion by {" "}
+            <motion.span
+              animate={{ scale: isHovered ? 1.2 : 1, color: isHovered ? "#02d6ff" : "#ffff" }}
+              transition={{ duration: 0.3 }}
+            >
+            Dinesh
+            </motion.span>
+            <motion.div
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+            >
+              <Code className="w-4 h-4 text-primary" />
+            </motion.div>
           </p>
           <p className="text-gray-400 text-xs opacity-60">
             © {new Date().getFullYear()} All rights reserved
