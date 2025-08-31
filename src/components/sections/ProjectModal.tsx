@@ -212,7 +212,7 @@ export const ProjectModal = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4 }}
         >
           {/* Backdrop */}
           <motion.div
@@ -220,7 +220,7 @@ export const ProjectModal = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
             onClick={onClose}
           />
 
@@ -228,29 +228,29 @@ export const ProjectModal = ({
           <motion.div
             ref={modalRef}
             className="relative w-full max-w-4xl max-h-[90vh] bg-background rounded-2xl shadow-2xl border overflow-hidden"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{
-              duration: 0.3,
+              duration: 0.5,
               ease: "easeOut",
               type: "spring",
               stiffness: 300,
-              damping: 30,
+              damping: 25,
             }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b bg-muted/30">
+            <motion.div
+              key={`header-${project.id}`}
+              className="flex items-center justify-between p-6 border-b bg-muted/30"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
               <div className="flex items-center gap-3">
-                <motion.div
-                  className="w-3 h-3 rounded-full bg-primary"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                />
                 <h2 className="text-2xl font-bold">{project.title}</h2>
                 {project.featured && (
                   <Badge
@@ -273,17 +273,23 @@ export const ProjectModal = ({
               >
                 <X className="w-4 h-4" />
               </Button>
-            </div>
+            </motion.div>
 
             {/* Content */}
-            <div className="flex flex-col lg:flex-row max-h-[calc(90vh-120px)] overflow-hidden">
+            <motion.div
+              key={project.id}
+              className="flex flex-col lg:flex-row max-h-[calc(90vh-120px)] overflow-hidden"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
               {/* Left Side - Image and Actions */}
               <div className="lg:w-1/2 p-6">
                 <motion.div
                   className="aspect-video rounded-lg overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 mb-6"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
                 >
                   {!imageError ? (
                     <img
@@ -312,46 +318,115 @@ export const ProjectModal = ({
                   className="flex flex-col gap-3"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
                 >
-                  <Button
-                    onClick={() => {
-                      hapticButtonPress();
-                      window.open(project.githubUrl, "_blank");
+                  <motion.div
+                    whileHover={{
+                      scale: 1.02,
+                      y: -2,
                     }}
-                    className="w-full bg-primary hover:bg-primary/90"
+                    whileTap={{
+                      scale: 0.98,
+                      y: 0,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 25,
+                      mass: 0.8,
+                    }}
                   >
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                    View Code on GitHub
-                  </Button>
-
-                  {project.demoUrl ? (
                     <Button
-                      variant="outline"
                       onClick={() => {
                         hapticButtonPress();
-                        window.open(project.demoUrl, "_blank");
+                        window.open(project.githubUrl, "_blank");
                       }}
-                      className="w-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
+                      className="w-full bg-primary hover:bg-primary/90 transition-all duration-150 ease-out hover:shadow-lg hover:shadow-primary/25 group"
                     >
-                      <Play className="w-4 h-4 mr-2" />
-                      Live Demo
+                      <motion.div
+                        className="flex items-center justify-center w-full"
+                        whileHover={{ x: 2 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 20,
+                        }}
+                      >
+                        <motion.div
+                          whileHover={{
+                            rotate: 15,
+                            scale: 1.1,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 15,
+                          }}
+                        >
+                          <svg
+                            className="w-4 h-4 mr-2"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                          </svg>
+                        </motion.div>
+                        <span className="font-medium">View Code on GitHub</span>
+                      </motion.div>
                     </Button>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      disabled
-                      className="w-full opacity-50 cursor-not-allowed"
+                  </motion.div>
+
+                  {project.demoUrl && (
+                    <motion.div
+                      whileHover={{
+                        scale: 1.02,
+                        y: -2,
+                      }}
+                      whileTap={{
+                        scale: 0.98,
+                        y: 0,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 25,
+                        mass: 0.8,
+                      }}
                     >
-                      <Play className="w-4 h-4 mr-2" />
-                      Demo Coming Soon
-                    </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          hapticButtonPress();
+                          window.open(project.demoUrl, "_blank");
+                        }}
+                        className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-150 ease-out hover:shadow-lg hover:shadow-primary/25 group"
+                      >
+                        <motion.div
+                          className="flex items-center justify-center w-full"
+                          whileHover={{ x: 2 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 20,
+                          }}
+                        >
+                          <motion.div
+                            whileHover={{
+                              rotate: 15,
+                              scale: 1.1,
+                            }}
+                            transition={{
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 15,
+                            }}
+                          >
+                            <Play className="w-4 h-4 mr-2" />
+                          </motion.div>
+                          <span className="font-medium">Live Demo</span>
+                        </motion.div>
+                      </Button>
+                    </motion.div>
                   )}
                 </motion.div>
               </div>
@@ -361,7 +436,7 @@ export const ProjectModal = ({
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
                   className="space-y-6"
                 >
                   {/* Description */}
@@ -409,9 +484,12 @@ export const ProjectModal = ({
                         <motion.li
                           key={index}
                           className="flex items-start gap-2 text-muted-foreground"
-                          initial={{ opacity: 0, x: 20 }}
+                          initial={{ opacity: 0, x: 15 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 + index * 0.05 }}
+                          transition={{
+                            delay: 0.4 + index * 0.1,
+                            duration: 0.3,
+                          }}
                         >
                           <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                           <span>{feature}</span>
@@ -421,7 +499,7 @@ export const ProjectModal = ({
                   </div>
                 </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Swipe Hint Overlay - Mobile Only */}
             <AnimatePresence>
@@ -432,7 +510,7 @@ export const ProjectModal = ({
                   animate={{ opacity: 1, backdropFilter: "blur(4px)" }}
                   exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
                   transition={{
-                    duration: 0.4,
+                    duration: 0.2,
                     ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for smooth scroll feel
                   }}
                 >
@@ -457,10 +535,10 @@ export const ProjectModal = ({
                       opacity: 0,
                     }}
                     transition={{
-                      duration: 0.5,
+                      duration: 0.25,
                       type: "spring",
-                      stiffness: 300,
-                      damping: 25,
+                      stiffness: 600,
+                      damping: 30,
                       ease: [0.25, 0.46, 0.45, 0.94],
                     }}
                   >
@@ -539,8 +617,8 @@ export const ProjectModal = ({
                         initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{
-                          delay: 0.2,
-                          duration: 0.4,
+                          delay: 0.1,
+                          duration: 0.2,
                           ease: [0.25, 0.46, 0.45, 0.94],
                         }}
                         className="space-y-2"
@@ -550,8 +628,8 @@ export const ProjectModal = ({
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{
-                            delay: 0.3,
-                            duration: 0.3,
+                            delay: 0.15,
+                            duration: 0.15,
                             ease: [0.25, 0.46, 0.45, 0.94],
                           }}
                         >
@@ -562,8 +640,8 @@ export const ProjectModal = ({
                           initial={{ opacity: 0, y: 8 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{
-                            delay: 0.4,
-                            duration: 0.3,
+                            delay: 0.2,
+                            duration: 0.15,
                             ease: [0.25, 0.46, 0.45, 0.94],
                           }}
                         >
@@ -625,7 +703,7 @@ export const ProjectModal = ({
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.3, duration: 0.3 }}
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </motion.button>
@@ -640,9 +718,9 @@ export const ProjectModal = ({
                   }}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 15 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.1, duration: 0.15 }}
                 >
                   <ChevronRight className="w-5 h-5" />
                 </motion.button>

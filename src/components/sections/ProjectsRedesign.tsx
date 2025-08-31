@@ -97,17 +97,15 @@ const ProjectTile = ({
             </svg>{" "}
             Code
           </a>
-          {project.demoUrl && (
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-secondary hover:underline"
-              onClick={() => hapticButtonPress()}
-            >
-              <ExternalLink className="w-4 h-4" /> Demo
-            </a>
-          )}
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+            onClick={() => hapticButtonPress()}
+          >
+            <ExternalLink className="w-4 h-4" /> Demo
+          </a>
         </div>
       </div>
     </article>
