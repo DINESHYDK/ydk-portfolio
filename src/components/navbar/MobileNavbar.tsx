@@ -6,6 +6,7 @@ import {
   BarChart3,
   MessageCircle,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { hapticNavigation } from "@/lib/haptic";
 
 const LINKS = [
@@ -31,7 +32,7 @@ export function MobileNavbar({
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`flex items-center justify-center p-3 rounded-full transition-all duration-300 ease-in-out hover:bg-muted/50 hover:scale-110 ${
+                className={`relative flex items-center justify-center p-3 rounded-full transition-all duration-300 ease-in-out hover:bg-muted/50 hover:scale-110 ${
                   activeId === id
                     ? "bg-muted text-primary font-medium scale-105"
                     : ""
@@ -40,6 +41,13 @@ export function MobileNavbar({
                 onClick={() => hapticNavigation()}
               >
                 <Icon className="h-[0.85rem] w-[0.85rem]" />
+                {activeId === id && (
+                  <motion.div
+                    layoutId="mobile-nav-indicator"
+                    className="absolute inset-0 bg-primary/20 rounded-full"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
               </a>
             </li>
           ))}

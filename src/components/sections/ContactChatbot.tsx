@@ -185,7 +185,7 @@ export const ContactChatbot = () => {
 
   return (
     <section id="contact" className="py-20 relative">
-      <div className="container max-w-4xl relative">
+      <div className="container relative">
         <SectionHeading
           text={mode === "chat" ? "Chat with DK" : "Contact Dinesh"}
           subtitle={

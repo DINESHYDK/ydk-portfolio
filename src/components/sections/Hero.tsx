@@ -70,19 +70,19 @@ export const Hero = () => {
             </motion.div>
 
             <motion.div
-              className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl md:max-w-none mx-auto md:mx-0 font-medium"
+              className="text-2xl md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl md:max-w-none mx-auto md:mx-0 font-medium"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <TextTypeOptimized
                 text={introTexts}
-                typingSpeed={55}
+                typingSpeed={45}
                 pauseDuration={2200}
                 showCursor={true}
                 cursorCharacter="|"
                 className="text-xl md:text-2xl lg:text-3xl text-muted-foreground font-medium font-sans"
-                loop={true}
+                loop={false}
                 startDelay={800}
               />
             </motion.div>

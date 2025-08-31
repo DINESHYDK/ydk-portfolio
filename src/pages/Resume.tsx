@@ -61,7 +61,11 @@ const Resume = () => {
           <Link
             to="/"
             className="flex items-center gap-2"
-            onClick={() => hapticButtonPress()}
+            onClick={() => {
+              hapticButtonPress();
+              // Scroll to top when navigating back
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Home

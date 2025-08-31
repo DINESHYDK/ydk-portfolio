@@ -108,7 +108,7 @@ export const Skills = () => {
 
   return (
     <section id="skills" className="py-20 skills-section">
-      <div className="container mx-auto px-4">
+      <div className="container">
         <SectionHeading
           text="Skills"
           subtitle="Technologies and tools I work with"

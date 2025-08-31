@@ -146,7 +146,7 @@
   }
 
   /* Smooth scroll across the app */
-  html {
+    html {
     scroll-behavior: smooth;
   }
 

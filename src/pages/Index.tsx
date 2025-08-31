@@ -7,6 +7,7 @@ import { ProjectsRedesign as Projects } from "@/components/sections/ProjectsRede
 import { Skills } from "@/components/sections/Skills";
 import { CodingStatsSection } from "@/components/sections/CodingStatsSection";
 import { ContactChatbot } from "@/components/sections/ContactChatbot";
+import Footer from "@/components/sections/Footer";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useState } from "react";
 
@@ -42,9 +43,7 @@ const Index = () => {
         <ContactChatbot />
       </main>
 
-      <footer className="py-10 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} Dinesh Krishna. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 };
