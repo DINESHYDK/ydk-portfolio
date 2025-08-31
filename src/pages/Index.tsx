@@ -9,9 +9,13 @@ import { CodingStatsSection } from "@/components/sections/CodingStatsSection";
 import { ContactChatbot } from "@/components/sections/ContactChatbot";
 import Footer from "@/components/sections/Footer";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [party, setParty] = useState(false);
   const active = useActiveSection([
     "home",
