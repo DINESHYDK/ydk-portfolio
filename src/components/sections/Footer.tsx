@@ -5,7 +5,7 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import { Heart, Code } from "lucide-react";
+import { Code } from "lucide-react";
 import { hapticNavigation } from "@/lib/haptic";
 
 const Footer = () => {
@@ -51,7 +51,7 @@ const Footer = () => {
   ];
 
   return (
-            <footer
+    <footer
       className="relative overflow-hidden"
       style={{
         background:
@@ -229,12 +229,15 @@ const Footer = () => {
         {/* Copyright */}
         <motion.div variants={itemVariants} className="space-y-3">
           <p className="text-gray-300 flex items-center justify-center gap-2 text-sm opacity-80">
-            Made with{" "} Passion by {" "}
+            Made with Passion by{" "}
             <motion.span
-              animate={{ scale: isHovered ? 1.2 : 1, color: isHovered ? "#02d6ff" : "#ffff" }}
+              animate={{
+                scale: isHovered ? 1.2 : 1,
+                color: isHovered ? "#02d6ff" : "#ffff",
+              }}
               transition={{ duration: 0.3 }}
             >
-            Dinesh
+              Dinesh
             </motion.span>
             <motion.div
               onHoverStart={() => setIsHovered(true)}

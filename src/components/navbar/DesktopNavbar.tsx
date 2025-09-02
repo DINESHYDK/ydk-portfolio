@@ -41,7 +41,7 @@ export function DesktopNavbar({
   };
 
   return (
-    <nav className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[70%] max-w-4xl">
+    <nav className="hidden lg:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[70%] max-w-4xl">
       <div className="navbar-glass rounded-full px-6 py-3 shadow-lg border animate-fade-in w-full">
         <ul className="flex items-center justify-between">
           <li>
