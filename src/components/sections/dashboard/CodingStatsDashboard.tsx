@@ -18,10 +18,10 @@ const sampleData: StatsData = {
   },
   leetcode: {
     totalSolved: 1250,
-    easy: 450,
-    medium: 650,
-    hard: 150,
-    contestRating: 1825,
+    easy: 8,
+    medium: 2,
+    hard: 1,
+    contestRating: 1725,
     maxRating: 1900, // Placeholder
     profileUrl: "https://leetcode.com/your_handle/", // Placeholder
   },

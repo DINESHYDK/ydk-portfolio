@@ -148,6 +148,40 @@ export const ContactChatbot = () => {
     }
   };
 
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent the default page reload
+
+    // Validate form fields
+    if (!values.name || !values.email || !values.message) {
+      toast.error("Please fill in all fields! ✨");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      toast.error("Please enter a valid email address! 📧");
+      return;
+    }
+
+    const myForm = event.target as HTMLFormElement;
+    const formData = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData as any).toString(),
+    })
+      .then(() => {
+        hapticSuccess();
+        toast.success("🎉 Thanks for your message! I'll get back to you soon.");
+        myForm.reset(); // Clear the form fields
+        setValues({}); // Clear the state
+      })
+      .catch((error) => {
+        toast.error("Oops! Something went wrong. Please try again.");
+        console.error(error);
+      });
+  };
+
   const formatMessage = (text: string) => {
     // Simple markdown-like formatting
     return text
@@ -327,119 +361,121 @@ export const ContactChatbot = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                      <div className="grid gap-6 md:grid-cols-2">
-                        {/* Name Field */}
-                        <motion.div
-                          className="space-y-2"
-                          whileHover={{ scale: 1.02 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <label className="text-sm font-medium text-primary flex items-center gap-2">
-                            <Sparkles className="w-4 h-4" />
-                            Your Name
-                          </label>
-                          <div className="relative group">
-                            <Input
-                              placeholder="What should I call you?"
-                              value={values.name ?? ""}
-                              onChange={(e) =>
-                                setValues({ ...values, name: e.target.value })
-                              }
-                              className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
-                            />
-                            <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                          </div>
-                        </motion.div>
-
-                        {/* Email Field */}
-                        <motion.div
-                          className="space-y-2"
-                          whileHover={{ scale: 1.02 }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <label className="text-sm font-medium text-primary flex items-center gap-2">
-                            <Send className="w-4 h-4" />
-                            Email Address
-                          </label>
-                          <div className="relative group">
-                            <Input
-                              placeholder="your.awesome@email.com"
-                              type="email"
-                              value={values.email ?? ""}
-                              onChange={(e) =>
-                                setValues({ ...values, email: e.target.value })
-                              }
-                              className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
-                            />
-                            <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                          </div>
-                        </motion.div>
-                      </div>
-
-                      {/* Message Field */}
-                      <motion.div
-                        className="space-y-2"
-                        whileHover={{ scale: 1.01 }}
-                        transition={{ type: "spring", stiffness: 300 }}
+                      <form
+                        name="contact"
+                        method="POST"
+                        data-netlify="true"
+                        onSubmit={handleFormSubmit}
+                        className="space-y-6"
                       >
-                        <label className="text-sm font-medium text-primary flex items-center gap-2">
-                          <MessageCircle className="w-4 h-4" />
-                          Your Message
-                        </label>
-                        <div className="relative group">
-                          <textarea
-                            placeholder="Tell me about your project, ideas, or just say hi! I'm excited to hear from you... 🚀"
-                            value={values.message ?? ""}
-                            onChange={(e) =>
-                              setValues({ ...values, message: e.target.value })
-                            }
-                            rows={6}
-                            className="w-full p-4 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20 resize-none focus:outline-none"
-                          />
-                          <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        {/* Hidden input required by Netlify */}
+                        <input type="hidden" name="form-name" value="contact" />
+
+                        <div className="grid gap-6 md:grid-cols-2">
+                          {/* Name Field */}
+                          <motion.div
+                            className="space-y-2"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                          >
+                            <label className="text-sm font-medium text-primary flex items-center gap-2">
+                              <Sparkles className="w-4 h-4" />
+                              Your Name
+                            </label>
+                            <div className="relative group">
+                              <Input
+                                name="name"
+                                placeholder="What should I call you?"
+                                value={values.name ?? ""}
+                                onChange={(e) =>
+                                  setValues({ ...values, name: e.target.value })
+                                }
+                                className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
+                                required
+                              />
+                              <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                            </div>
+                          </motion.div>
+
+                          {/* Email Field */}
+                          <motion.div
+                            className="space-y-2"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                          >
+                            <label className="text-sm font-medium text-primary flex items-center gap-2">
+                              <Send className="w-4 h-4" />
+                              Email Address
+                            </label>
+                            <div className="relative group">
+                              <Input
+                                name="email"
+                                placeholder="your.awesome@email.com"
+                                type="email"
+                                value={values.email ?? ""}
+                                onChange={(e) =>
+                                  setValues({
+                                    ...values,
+                                    email: e.target.value,
+                                  })
+                                }
+                                className="h-12 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20"
+                                required
+                              />
+                              <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                            </div>
+                          </motion.div>
                         </div>
-                      </motion.div>
 
-                      {/* Submit Button */}
-                      <motion.div
-                        className="flex justify-center pt-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                      >
-                        <motion.button
-                          onClick={() => {
-                            hapticSuccess(); // More satisfying heavy vibration
-                            if (
-                              !values.name ||
-                              !values.email ||
-                              !values.message
-                            ) {
-                              toast.error("Please fill in all fields! ✨");
-                              return;
-                            }
-                            if (
-                              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
-                            ) {
-                              toast.error(
-                                "Please enter a valid email address! 📧"
-                              );
-                              return;
-                            }
-                            toast.success(
-                              "🎉 Message sent! I'll get back to you soon!"
-                            );
-                          }}
-                          className="group relative px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-                          whileHover={{ scale: 1.05, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
+                        {/* Message Field */}
+                        <motion.div
+                          className="space-y-2"
+                          whileHover={{ scale: 1.01 }}
+                          transition={{ type: "spring", stiffness: 300 }}
                         >
-                          <span className="relative flex items-center gap-3">
-                            <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                            Send Message
-                          </span>
-                        </motion.button>
-                      </motion.div>
+                          <label className="text-sm font-medium text-primary flex items-center gap-2">
+                            <MessageCircle className="w-4 h-4" />
+                            Your Message
+                          </label>
+                          <div className="relative group">
+                            <textarea
+                              name="message"
+                              placeholder="Tell me about your project, ideas, or just say hi! I'm excited to hear from you... 🚀"
+                              value={values.message ?? ""}
+                              onChange={(e) =>
+                                setValues({
+                                  ...values,
+                                  message: e.target.value,
+                                })
+                              }
+                              rows={6}
+                              className="w-full p-4 bg-background/50 border-2 border-primary/20 focus:border-primary/60 rounded-xl transition-all duration-300 group-hover:border-primary/40 focus:shadow-lg focus:shadow-primary/20 resize-none focus:outline-none"
+                              required
+                            />
+                            <div className="absolute inset-0 rounded-xl bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                          </div>
+                        </motion.div>
+
+                        {/* Submit Button */}
+                        <motion.div
+                          className="flex justify-center pt-4"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.4 }}
+                        >
+                          <motion.button
+                            type="submit"
+                            className="group relative px-8 py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                            whileHover={{ scale: 1.05, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <span className="relative flex items-center gap-3">
+                              <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                              Send Message
+                            </span>
+                          </motion.button>
+                        </motion.div>
+                      </form>
 
                       {/* Footer Note */}
                       <motion.div
