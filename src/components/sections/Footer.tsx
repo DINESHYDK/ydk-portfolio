@@ -140,7 +140,7 @@ const Footer = () => {
       </div>
 
       <motion.div
-        className="container relative z-20 py-12 text-center"
+        className="container relative z-20 py-12 text-center max-w-7xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

@@ -22,7 +22,9 @@ export const CodingStatsSection: React.FC = () => {
           <span>Last updated: {lastUpdated}</span>
         </div>
 
-        <CodingStatsDashboard />
+        <div className="max-w-7xl mx-auto">
+          <CodingStatsDashboard />
+        </div>
       </div>
     </section>
   );

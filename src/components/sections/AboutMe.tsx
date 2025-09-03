@@ -5,7 +5,7 @@ export const AboutMe = () => {
     <section id="about" className="py-20">
       <div className="container">
         <SectionHeading text="About Me" subtitle="Get to know me better" />
-        <div className="space-y-6 text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <div className="space-y-6 text-muted-foreground max-w-7xl mx-auto leading-relaxed">
           {/* Intro */}
           <p>
             <strong>Hi, I’m Y. Dinesh Krishna</strong> — a Sophomore in Computer

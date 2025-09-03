@@ -6,15 +6,15 @@ import type { StatsData } from "./types";
 
 const sampleData: StatsData = {
   total: {
-    questionsSolved: 2050,
+    questionsSolved: 2000,
     contests: 45,
-    combinedRating: 4500,
   },
   codeforces: {
     rating: 2400,
     maxRating: 2500,
     rank: "Master",
     maxRank: "Grandmaster",
+    profileUrl: "https://codeforces.com/profile/your_handle", // Placeholder
   },
   leetcode: {
     totalSolved: 1250,
@@ -22,14 +22,21 @@ const sampleData: StatsData = {
     medium: 650,
     hard: 150,
     contestRating: 1825,
+    maxRating: 1900, // Placeholder
+    profileUrl: "https://leetcode.com/your_handle/", // Placeholder
   },
   codechef: {
-    rating: 2100,
-    stars: "5★",
+    rating: 1320,
+    maxRating: 1447,
+    stars: "2★",
+    problemsSolved: 1032,
+    globalRank: 67208,
+    profileUrl: "https://www.codechef.com/users/your_handle", // Placeholder
   },
   gfg: {
     totalSolved: 800,
     score: 750,
+    profileUrl: "https://auth.geeksforgeeks.org/user/your_handle/practice", // Placeholder
   },
 };
 
@@ -43,44 +50,57 @@ export const CodingStatsDashboard: React.FC<CodingStatsDashboardProps> = ({
   const d = data;
 
   return (
-    <div
-      className="grid gap-4 md:gap-6"
-      style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}
-    >
-      {/* Total Achievements - spans 2 cols on md+ */}
-      <div className="md:col-span-2">
-        <section className="rounded-2xl border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm p-5 md:p-6 h-full">
-          <header className="flex items-center gap-3 mb-2 md:mb-4">
-            <Award className="h-6 w-6 text-primary" />
-            <h3 className="text-lg md:text-xl font-semibold text-white">
-              Total Achievements
-            </h3>
-          </header>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <StatCard
-              label="Questions Solved"
-              value={d.total.questionsSolved.toLocaleString()}
-            />
-            <StatCard
-              label="Contests Participated"
-              value={d.total.contests.toLocaleString()}
-            />
-            <StatCard
-              label="Combined Rating"
-              value={
-                <span className="text-primary">
-                  {d.total.combinedRating.toLocaleString()}
-                </span>
-              }
-            />
-          </div>
-        </section>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+      {/* Total Achievements (Takes 1 of 3 columns) */}
+      <section className="md:col-span-1 rounded-2xl border border-white/10 bg-[hsl(0,0%,10%)]/80 backdrop-blur-sm p-5 md:p-6 h-full">
+        <header className="flex items-center gap-3 mb-2 md:mb-4">
+          <Award className="h-6 w-6 text-primary" />
+          <h3 className="text-lg md:text-xl font-semibold text-white">
+            Total Achievements
+          </h3>
+        </header>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <StatCard
+            label="Questions Solved"
+            value={d.total.questionsSolved.toLocaleString()}
+          />
+          <StatCard
+            label="Contests Participated"
+            value={d.total.contests.toLocaleString()}
+          />
+        </div>
+      </section>
 
-      {/* Codeforces */}
+      {/* CodeChef (Takes 2 of 3 columns) */}
+      <PlatformCard
+        title="CodeChef"
+        icon={<Star className="h-5 w-5 text-primary" />}
+        href={d.codechef.profileUrl}
+        className="md:col-span-2"
+      >
+        <div className="grid grid-cols-2 gap-3">
+          <StatCard label="Rating" value={d.codechef.rating.toLocaleString()} />
+          <StatCard
+            label="Max Rating"
+            value={d.codechef.maxRating.toLocaleString()}
+          />
+          <StatCard
+            label="Problems Solved"
+            value={d.codechef.problemsSolved.toLocaleString()}
+          />
+          <StatCard
+            label="Global Rank"
+            value={d.codechef.globalRank.toLocaleString()}
+          />
+        </div>
+      </PlatformCard>
+
+      {/* Codeforces (will automatically start on the next row) */}
       <PlatformCard
         title="Codeforces"
         icon={<Trophy className="h-5 w-5 text-primary" />}
+        href={d.codeforces.profileUrl}
+        className="h-full"
       >
         <div className="space-y-3">
           <div className="flex items-center justify-between text-sm">
@@ -114,11 +134,12 @@ export const CodingStatsDashboard: React.FC<CodingStatsDashboardProps> = ({
       <PlatformCard
         title="LeetCode"
         icon={<Target className="h-5 w-5 text-primary" />}
-        className="md:col-span-2"
+        href={d.leetcode.profileUrl}
+        className="h-full"
       >
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           <StatCard
-            label="Total"
+            label="Total Solved"
             value={d.leetcode.totalSolved.toLocaleString()}
           />
           <StatCard
@@ -132,27 +153,17 @@ export const CodingStatsDashboard: React.FC<CodingStatsDashboardProps> = ({
           <StatCard
             label="Hard"
             value={<span className="text-red-400">{d.leetcode.hard}</span>}
-            className="col-span-3 sm:col-span-1"
           />
           <StatCard
             label="Contest Rating"
             value={d.leetcode.contestRating?.toLocaleString() ?? "—"}
-            className="col-span-3 sm:col-span-2"
           />
-        </div>
-      </PlatformCard>
-
-      {/* CodeChef */}
-      <PlatformCard
-        title="CodeChef"
-        icon={<Star className="h-5 w-5 text-primary" />}
-      >
-        <div className="grid grid-cols-2 gap-3">
-          <StatCard label="Rating" value={d.codechef.rating.toLocaleString()} />
-          <StatCard
-            label="Stars"
-            value={<span className="text-primary">{d.codechef.stars}</span>}
-          />
+          {d.leetcode.maxRating && (
+            <StatCard
+              label="Max Rating"
+              value={d.leetcode.maxRating.toLocaleString()}
+            />
+          )}
         </div>
       </PlatformCard>
 
@@ -160,7 +171,8 @@ export const CodingStatsDashboard: React.FC<CodingStatsDashboardProps> = ({
       <PlatformCard
         title="GeeksforGeeks"
         icon={<Zap className="h-5 w-5 text-primary" />}
-        className="md:col-span-2"
+        href={d.gfg.profileUrl}
+        className="h-full"
       >
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
           <StatCard

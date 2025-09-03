@@ -208,20 +208,22 @@ export const ProjectsRedesign = () => {
         </div>
 
         {/* Grid */}
-        <div
-          className="grid gap-6"
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          }}
-        >
-          {projects.map((p) => (
-            <div
-              key={p.id}
-              className={p.featured ? "lg:col-span-2" : undefined}
-            >
-              <ProjectTile project={p} onOpen={openModal} />
-            </div>
-          ))}
+        <div className="max-w-7xl mx-auto">
+          <div
+            className="grid gap-6"
+            style={{
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            }}
+          >
+            {projects.map((p) => (
+              <div
+                key={p.id}
+                className={p.featured ? "lg:col-span-2" : undefined}
+              >
+                <ProjectTile project={p} onOpen={openModal} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

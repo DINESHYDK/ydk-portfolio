@@ -1,7 +1,6 @@
 export interface TotalStats {
   questionsSolved: number;
   contests: number;
-  combinedRating: number;
 }
 
 export interface CodeforcesStats {
@@ -9,6 +8,7 @@ export interface CodeforcesStats {
   maxRating: number;
   rank: string;
   maxRank: string;
+  profileUrl: string;
 }
 
 export interface LeetCodeStats {
@@ -16,17 +16,24 @@ export interface LeetCodeStats {
   easy: number;
   medium: number;
   hard: number;
-  contestRating?: number;
+  contestRating: number;
+  maxRating?: number;
+  profileUrl: string;
 }
 
 export interface CodeChefStats {
   rating: number;
+  maxRating: number;
   stars: string; // e.g., "5★"
+  problemsSolved: number;
+  globalRank: number;
+  profileUrl: string;
 }
 
 export interface GfgStats {
   totalSolved: number;
   score?: number;
+  profileUrl: string;
 }
 
 export interface StatsData {
