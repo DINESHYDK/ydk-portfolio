@@ -7,6 +7,7 @@ import {
 } from "@radix-ui/react-icons";
 import { Code } from "lucide-react";
 import { hapticNavigation } from "@/lib/haptic";
+import StarfieldBackground from "@/components/ui/StarfieldBackground";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -52,15 +53,19 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative overflow-hidden"
+      className="relative overflow-hidden min-h-[400px] md:min-h-[400px] h-[95vh] md:h-auto"
       style={{
         background:
           "linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 50%, #000000 100%)",
-        minHeight: "400px",
       }}
     >
+      {/* Starfield Background */}
+      <div className="absolute inset-0 z-0">
+        <StarfieldBackground starCount={600} starColor="white" speed={0.01} />
+      </div>
+
       {/* Dramatic spotlight effects */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-10">
         {/* Left spotlight */}
         <div
           className="absolute top-0 left-1/4 w-96 h-96 opacity-30"
@@ -135,7 +140,7 @@ const Footer = () => {
       </div>
 
       <motion.div
-        className="container relative z-10 py-12 text-center"
+        className="container relative z-20 py-12 text-center"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
