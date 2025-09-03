@@ -53,7 +53,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="relative overflow-hidden min-h-[400px] md:min-h-[400px] h-[95vh] md:h-auto"
+      className="relative overflow-hidden min-h-[400px] md:min-h-[400px] h-[85vh] md:h-auto"
       style={{
         background:
           "linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 50%, #000000 100%)",
@@ -140,7 +140,7 @@ const Footer = () => {
       </div>
 
       <motion.div
-        className="container relative z-20 py-12 text-center max-w-7xl mx-auto"
+        className="container relative z-20 pt-36 pb-12 md:py-12 text-center max-w-7xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
