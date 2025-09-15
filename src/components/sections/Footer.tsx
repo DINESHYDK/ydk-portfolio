@@ -1,16 +1,40 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
 } from "@radix-ui/react-icons";
-import { Code } from "lucide-react";
-import { hapticNavigation } from "@/lib/haptic";
+import { Code, Sparkles } from "lucide-react";
+import { hapticNavigation, hapticButtonPress } from "@/lib/haptic";
 import StarfieldBackground from "@/components/ui/StarfieldBackground";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [starSpeed, setStarSpeed] = useState(0.01);
+  const [isBoosting, setIsBoosting] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const resetTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReducedMotion(media.matches);
+    onChange();
+    media.addEventListener?.("change", onChange);
+    return () => media.removeEventListener?.("change", onChange);
+  }, []);
+
+  const triggerBoost = () => {
+    if (isBoosting || reducedMotion) return;
+    hapticButtonPress();
+    setIsBoosting(true);
+    setStarSpeed(0.04);
+    if (resetTimerRef.current) window.clearTimeout(resetTimerRef.current);
+    resetTimerRef.current = window.setTimeout(() => {
+      setStarSpeed(0.01);
+      setIsBoosting(false);
+    }, 3500);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -61,7 +85,11 @@ const Footer = () => {
     >
       {/* Starfield Background */}
       <div className="absolute inset-0 z-0">
-        <StarfieldBackground starCount={600} starColor="white" speed={0.01} />
+        <StarfieldBackground
+          starCount={600}
+          starColor="white"
+          speed={starSpeed}
+        />
       </div>
 
       {/* Dramatic spotlight effects */}

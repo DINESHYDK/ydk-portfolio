@@ -15,7 +15,7 @@ export const skillsData: SkillCategory[] = [
     skills: [
       {
         name: "C",
-        iconClass: "devicon-c-plain colored text-2xl",
+        iconClass: "custom-c text-2xl",
       },
       {
         name: "C++",
@@ -31,11 +31,7 @@ export const skillsData: SkillCategory[] = [
       },
       {
         name: "Python",
-        iconClass: "devicon-python-plain colored text-2xl",
-      },
-      {
-        name: "Java",
-        iconClass: "devicon-java-plain colored text-2xl",
+        iconClass: "custom-python text-2xl",
       },
     ],
   },
@@ -48,8 +44,8 @@ export const skillsData: SkillCategory[] = [
       },
       {
         name: "Next.js",
-        iconClass: "devicon-nextjs-original text-2xl",
-        color: "#ffffff",
+        iconClass: "custom-nextjs text-2xl",
+        color: "#000000",
       },
       {
         name: "Node.js",
@@ -68,10 +64,7 @@ export const skillsData: SkillCategory[] = [
         name: "CSS3",
         iconClass: "devicon-css3-plain colored text-2xl",
       },
-      {
-        name: "Sass",
-        iconClass: "devicon-sass-original colored text-2xl",
-      },
+
       {
         name: "Bootstrap",
         iconClass: "devicon-bootstrap-plain colored text-2xl",
@@ -126,7 +119,7 @@ export const skillsData: SkillCategory[] = [
       },
       {
         name: "Figma",
-        iconClass: "devicon-figma-plain colored text-2xl",
+        iconClass: "custom-figma text-2xl",
       },
       {
         name: "Docker",

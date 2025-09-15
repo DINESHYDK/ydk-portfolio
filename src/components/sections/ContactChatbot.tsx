@@ -65,7 +65,16 @@ export const ContactChatbot = () => {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Use a small delay to ensure the DOM has updated before scrolling
+    const timer = setTimeout(() => {
+      endRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [messages, showTypingIndicator]);
 
   const simulateTyping = (callback: () => void, delay = 1000) => {
@@ -511,18 +520,16 @@ export const ContactChatbot = () => {
 
                   {/* Messages Area (fixed height, scrolls instead of growing) */}
                   <div className="h-[420px] md:h-[500px] overflow-y-auto p-6 space-y-4 bg-background/60">
-                    <AnimatePresence mode="popLayout">
+                    <AnimatePresence>
                       {messages.map((message) => (
                         <motion.div
                           key={message.id}
-                          layout
                           initial={{ opacity: 0, y: 20, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -20, scale: 0.95 }}
                           transition={{
                             duration: 0.3,
                             delay: 0.1,
-                            layout: { duration: 0.2 },
                           }}
                           className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                         >

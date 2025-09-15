@@ -4,40 +4,61 @@ import PlatformCard from "./PlatformCard";
 import StatCard from "./StatCard";
 import type { StatsData } from "./types";
 
-const sampleData: StatsData = {
-  total: {
-    questionsSolved: 2000,
-    contests: 45,
-  },
+// Function to calculate total stats from individual platform data
+const calculateTotalStats = (platformData: Omit<StatsData, "total">) => {
+  const totalQuestionsSolved =
+    (platformData.leetcode?.totalSolved || 0) +
+    (platformData.codechef?.problemsSolved || 0) +
+    (platformData.gfg?.totalSolved || 0);
+  // Note: Codeforces doesn't have a direct "problems solved" count in the current structure
+
+  // For contests, you can manually add this or estimate based on your participation
+  // This is a placeholder - you should update this with your actual contest count
+  const totalContests = 12; // Update this with your actual total contests participated
+
+  return {
+    questionsSolved: totalQuestionsSolved,
+    contests: totalContests,
+  };
+};
+
+// Platform data without totals (totals will be calculated automatically)
+const platformData = {
   codeforces: {
-    rating: 2400,
-    maxRating: 2500,
-    rank: "Master",
-    maxRank: "Grandmaster",
-    profileUrl: "https://codeforces.com/profile/your_handle", // Placeholder
+    rating: 820,
+    maxRating: 820,
+    rank: "Pupil",
+    maxRank: "Pupil",
+    profileUrl: "https://codeforces.com/profile/dineshydk",
   },
   leetcode: {
-    totalSolved: 1250,
-    easy: 8,
-    medium: 2,
+    totalSolved: 34,
+    easy: 23,
+    medium: 10,
     hard: 1,
-    contestRating: 1725,
-    maxRating: 1900, // Placeholder
-    profileUrl: "https://leetcode.com/your_handle/", // Placeholder
+    contestRating: 820,
+    maxRating: 820,
+    profileUrl: "https://leetcode.com/dineshydk/",
   },
   codechef: {
-    rating: 1320,
-    maxRating: 1447,
+    rating: 1720,
+    maxRating: 1720,
     stars: "2★",
-    problemsSolved: 1032,
+    problemsSolved: 1045,
     globalRank: 67208,
-    profileUrl: "https://www.codechef.com/users/your_handle", // Placeholder
+    profileUrl: "https://www.codechef.com/users/dineshydk",
   },
   gfg: {
-    totalSolved: 800,
-    score: 750,
-    profileUrl: "https://auth.geeksforgeeks.org/user/your_handle/practice", // Placeholder
+    totalSolved: 39,
+    score: 390,
+    profileUrl: "https://auth.geeksforgeeks.org/user/dineshydk/practice",
   },
+};
+
+// Complete data with auto-calculated totals
+const sampleData: StatsData = {
+  total: calculateTotalStats(platformData),
+  ...platformData,
 };
 
 export interface CodingStatsDashboardProps {
