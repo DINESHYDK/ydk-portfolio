@@ -49,20 +49,6 @@
     --sidebar-border: 220 13% 18%; /* #2a2a35 */
     --sidebar-ring: 195 100% 50%;
 
-    /* Command Palette Specific Colors */
-    --cp-background: 0 0% 3%; /* #080808 - Near black */
-    --cp-surface: 220 13% 10%; /* #16161a - Dark blue-gray surface */
-    --cp-border: 220 13% 22%; /* #2f2f3c - Border color */
-    --cp-glow: 195 100% 60%; /* #00e6ff - Bright cyan glow */
-    --cp-text-primary: 0 0% 95%; /* #f2f2f2 - Primary text */
-    --cp-text-secondary: 0 0% 65%; /* #a6a6a6 - Secondary text */
-    --cp-accent: 270 85% 58%; /* #a855f7 - Purple accent */
-    --cp-hover: 220 13% 18%; /* #25252f - Hover state */
-    --cp-focus: 195 100% 60%; /* #00e6ff - Focus state */
-    --cp-success: 160 84% 39%; /* #10b981 - Success state */
-    --cp-warning: 45 100% 60%; /* #f59e0b - Warning state */
-    --cp-error: 0 84% 60%; /* #ef4444 - Error state */
-
     /* Project Showcase Specific Colors */
     --project-card-radius: 12px;
     --project-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -111,19 +97,6 @@
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 13% 18%;
     --sidebar-ring: 195 100% 50%;
-
-    --cp-background: 0 0% 3%;
-    --cp-surface: 220 13% 10%;
-    --cp-border: 220 13% 22%;
-    --cp-glow: 195 100% 60%;
-    --cp-text-primary: 0 0% 95%;
-    --cp-text-secondary: 0 0% 65%;
-    --cp-accent: 270 85% 58%;
-    --cp-hover: 220 13% 18%;
-    --cp-focus: 195 100% 60%;
-    --cp-success: 160 84% 39%;
-    --cp-warning: 45 100% 60%;
-    --cp-error: 0 84% 60%;
   }
 }
 
@@ -146,7 +119,7 @@
   }
 
   /* Smooth scroll across the app */
-    html {
+  html {
     scroll-behavior: smooth;
   }
 
@@ -154,20 +127,6 @@
   section {
     scroll-margin-top: 96px; /* ~6rem */
   }
-}
-
-/* Command Palette Styles */
-.command-palette {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--background) / 0.8),
-    hsl(var(--card) / 0.6)
-  );
-  backdrop-filter: blur(16px);
-  border: 1px solid hsl(var(--border));
-  box-shadow:
-    0 10px 30px -10px hsl(var(--primary) / 0.2),
-    0 0 20px hsl(var(--primary) / 0.1);
 }
 
 .glass-dark {
@@ -236,36 +195,6 @@
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.25),
     0 0 30px rgba(0, 212, 255, 0.15);
-}
-
-/* Command Palette Animation Properties */
-.cp-parallax-fast {
-  transition: transform 0.1s ease-out;
-}
-
-.cp-parallax-medium {
-  transition: transform 0.2s ease-out;
-}
-
-.cp-parallax-slow {
-  transition: transform 0.3s ease-out;
-}
-
-.cp-mesh-animation {
-  animation: cp-mesh-float 8s ease-in-out infinite;
-}
-
-@keyframes cp-mesh-float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-10px) rotate(1deg);
-  }
-  66% {
-    transform: translateY(5px) rotate(-1deg);
-  }
 }
 
 /* Scrollbar Styling */
